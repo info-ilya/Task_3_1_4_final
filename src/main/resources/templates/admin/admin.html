@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Таблица Users</title>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div style="text-align: center">
+    <h2>Все Users</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Логин</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Email</th>
+            <th>Действие</th>
+        </tr>
+        <tr th:each="user : ${usersList}">
+            <td th:utext="${user.id}">ID</td>
+            <td><a th:href="@{/{name}(name=${user.userName})}" th:utext="${user.userName}">Login</a></td>
+            <td th:utext="${user.firstName}">Firstname</td>
+            <td th:utext="${user.lastName}">Surname</td>
+            <td th:utext="${user.email}">Email</td>
+            <td>
+                <a th:href="@{/edit(name=${user.userName})}">Edit</a>
+                <a th:href="@{/del(id=${user.id})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+    <h2>Добавить нового User</h2>
+    <form>
+        <button type="submit" formaction="/admin/new">Добавить</button>
+    </form>
+    <br>
+    <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
+</body>
+</html>

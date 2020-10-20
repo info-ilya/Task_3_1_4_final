@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Отредактировать User</title>
+    <link href="/css/narrow_style.css" rel="stylesheet">
+</head>
+<body>
+<div style="text-align: center">
+    <h2>Изменить пользователя</h2>
+    <form th:method="POST" th:action="@{/edit}" th:object="${user}">
+        <table>
+            <input type="hidden" th:field="*{id}"/>
+            <input th:default="*{password}" type="hidden" th:field="*{password}"/>
+            <tr>
+                <td><label for="userName">Username</label></td>
+                <td><input type="text" th:field="*{userName}" id="userName"></td>
+            </tr>
+            <tr>
+                <td><label for="firstName">Firstname</label></td>
+                <td><input type="text" th:field="*{firstName}" id="firstName"></td>
+            </tr>
+            <tr>
+                <td><label for="lastName">Lastname</label></td>
+                <td><input type="text" th:field="*{lastName}" id="lastName"></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email</label></td>
+                <td><input type="text" th:field="*{email}" id="email"></td>
+            </tr>
+            <tr>
+                <td style="text-align: center" colspan="2"><input type="submit" value="Отправить"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
