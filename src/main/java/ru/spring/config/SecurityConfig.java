@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ru.spring.service.UserService;
 
 @Configuration
@@ -30,17 +31,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/").access("hasAnyRole('ADMIN', 'USER')")
+                .antMatchers("/").authenticated()
                 .antMatchers("/user/**").access("hasAnyRole('USER')")
                 .antMatchers("/admin/**").access("hasAnyRole('ADMIN')")
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticateTheUser")
+                .usernameParameter("email")
                 .successHandler(successHandler)
                 .permitAll()
                 .and()
-                .logout().permitAll()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
                 .and()
                 .exceptionHandling().accessDeniedPage("/access-denied");
     }

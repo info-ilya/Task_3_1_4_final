@@ -11,8 +11,8 @@
     <groupId>ru.spring</groupId>
     <artifactId>boot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Task_3_1_1</name>
-    <description>Task_3_1_1</description>
+    <name>Task_3_1_2</name>
+    <description>Task_3_1_2</description>
 
     <properties>
         <java.version>14</java.version>
@@ -26,6 +26,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

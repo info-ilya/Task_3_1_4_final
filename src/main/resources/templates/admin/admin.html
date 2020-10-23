@@ -1,44 +1,78 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <meta charset="UTF-8">
     <title>Таблица Users</title>
-    <link href="/css/style.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/css/dashboard.css" rel="stylesheet">
 </head>
 <body>
-<div style="text-align: center">
-    <h2>Все Users</h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Логин</th>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Email</th>
-            <th>Действие</th>
-        </tr>
-        <tr th:each="user : ${usersList}">
-            <td th:utext="${user.id}">ID</td>
-            <td><a th:href="@{/{name}(name=${user.userName})}" th:utext="${user.userName}">Login</a></td>
-            <td th:utext="${user.firstName}">Firstname</td>
-            <td th:utext="${user.lastName}">Surname</td>
-            <td th:utext="${user.email}">Email</td>
-            <td>
-                <a th:href="@{/edit(name=${user.userName})}">Edit</a>
-                <a th:href="@{/del(id=${user.id})}">Delete</a>
-            </td>
-        </tr>
-    </table>
-    <h2>Добавить нового User</h2>
-    <form>
-        <button type="submit" formaction="/admin/new">Добавить</button>
-    </form>
-    <br>
-    <form th:action="@{/logout}" method="POST">
-        <input type="submit" value="Logout"/>
-    </form>
+<div sec:authorize="hasRole('ADMIN')">
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <b class="navbar-brand col-sm-3 col-md-2 mr-0" th:utext="${session.user.getEmail()}">with</b>
+        <span class="navbar-brand col-sm-3 col-md-2 mr-0" >with roles: </span>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" th:href="@{/logout}">Logout</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column" th:each="user : ${usersList}">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/{name}(name=${user.userName})}">
+                            <span data-feather="home" th:utext="${user.userName}"></span>
+                             <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <h2>Admin panel</h2>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <caption>All users</caption>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${usersList}">
+                        <td th:utext="${user.id}">ID</td>
+                        <td th:utext="${user.userName}">Username</td>
+                        <td th:utext="${user.firstName}">Firstname</td>
+                        <td th:utext="${user.lastName}">Surname</td>
+                        <td th:utext="${user.email}">Email</td>
+                        <td th:utext="${user.roles}">Role</td>
+                        <td><a class="btn btn-info btn-sm" th:href="@{/edit(name=${user.userName})}">Edit</a></td>
+                        <td><a class="btn btn-danger btn-sm" th:href="@{/del(id=${user.id})}">Delete</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
 </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 </body>
 </html>
