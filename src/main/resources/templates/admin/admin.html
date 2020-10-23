@@ -11,10 +11,16 @@
     <link href="/css/dashboard.css" rel="stylesheet">
 </head>
 <body>
-<div sec:authorize="hasRole('ADMIN')">
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <b class="navbar-brand col-sm-3 col-md-2 mr-0" th:utext="${session.user.getEmail()}">with</b>
-        <span class="navbar-brand col-sm-3 col-md-2 mr-0" >with roles: </span>
+
+<nav class="navbar navbar-dark bg-dark flex-md-nowrap shadow">
+    <span class="navbar-text">
+    <b th:utext="${session.user.getEmail()}">with</b>
+    <span>with roles: </span>
+         <span th:each="authority : ${#authentication.getAuthorities()}"
+               th:if="${authority.getAuthority().startsWith('ROLE_')}"
+               th:text="${authority.getAuthority().replaceFirst('ROLE_', ' ')}">
+    </span>
+</span>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link" th:href="@{/logout}">Logout</a>
@@ -30,7 +36,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" th:href="@{/{name}(name=${user.userName})}">
                             <span data-feather="home" th:utext="${user.userName}"></span>
-                             <span class="sr-only">(current)</span>
+                            <span class="sr-only">(current)</span>
                         </a>
                     </li>
                 </ul>
@@ -39,40 +45,61 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <h2>Admin panel</h2>
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <caption>All users</caption>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="user : ${usersList}">
-                        <td th:utext="${user.id}">ID</td>
-                        <td th:utext="${user.userName}">Username</td>
-                        <td th:utext="${user.firstName}">Firstname</td>
-                        <td th:utext="${user.lastName}">Surname</td>
-                        <td th:utext="${user.email}">Email</td>
-                        <td th:utext="${user.roles}">Role</td>
-                        <td><a class="btn btn-info btn-sm" th:href="@{/edit(name=${user.userName})}">Edit</a></td>
-                        <td><a class="btn btn-danger btn-sm" th:href="@{/del(id=${user.id})}">Delete</a></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <ul class="nav nav-tabs mt-5" id="myTabs">
+                <li class="nav-item"><a href="#home" role="tab" data-toggle="list" class="nav-link active">Users
+                    table</a></li>
+                <li class="nav-item"><a href="#newuser" role="tab" data-toggle="list" class="nav-link">New User</a></li>
+            </ul>
+            <div class="tab-content pt-3">
+                <div class="tab-pane active" id="home" role="tabpanel">
+                    <h5>All users</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user : ${usersList}">
+                                <td th:utext="${user.id}">ID</td>
+                                <td th:utext="${user.userName}">Username</td>
+                                <td th:utext="${user.firstName}">Firstname</td>
+                                <td th:utext="${user.lastName}">Surname</td>
+                                <td th:utext="${user.email}">Email</td>
+                                <td th:utext="${user.roles}">Role</td>
+                                <td><a class="btn btn-info btn-sm" th:href="@{/edit(name=${user.userName})}">Edit</a>
+                                </td>
+                                <td><a class="btn btn-danger btn-sm" th:href="@{/del(id=${user.id})}">Delete</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane" id="newuser" role="tabpanel">New User</div>
             </div>
         </main>
     </div>
 </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="/js/bootstrap.js"></script>
+<script>
+    $('#myList a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+    $(function () {
+        $('#myList a:first-child').tab('show')
+    })
+</script>
 </body>
 </html>

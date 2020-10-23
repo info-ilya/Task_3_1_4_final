@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ru.spring.service.UserService;
@@ -27,12 +28,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
+    // Remove the ROLE_ prefix
+//    @Bean
+//    GrantedAuthorityDefaults grantedAuthorityDefaults() {
+//        return new GrantedAuthorityDefaults("");
+//    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
                 .antMatchers("/").authenticated()
-                .antMatchers("/user/**").access("hasAnyRole('USER')")
+                .antMatchers("/user/**").access("hasAnyRolea('USER')")
                 .antMatchers("/admin/**").access("hasAnyRole('ADMIN')")
                 .and()
                 .formLogin()
