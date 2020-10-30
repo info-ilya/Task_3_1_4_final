@@ -6,9 +6,8 @@ import ru.spring.model.User;
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
-    User findById(Long id);
 
-    User findByName(String name);
+    User findByEmail(String name);
 
     void saveUser(User user);
 

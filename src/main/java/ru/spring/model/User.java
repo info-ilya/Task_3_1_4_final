@@ -17,8 +17,8 @@ public class User{
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username", unique = true)
-    private String userName;
+    @Column(name = "age")
+    private int age;
 
     @Column(name = "password")
     private String password;
@@ -29,26 +29,27 @@ public class User{
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+//    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(String userName, String password, String firstName, String lastName, String email) {
-        this.userName = userName;
+    public User(int age, String password, String firstName, String lastName, String email) {
+        this.age = age;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
-    public User(String userName, String password, String firstName, String lastName, String email,
+    public User(int age, String password, String firstName, String lastName, String email,
                 Set<Role> roles) {
-        this.userName = userName;
+        this.age = age;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;

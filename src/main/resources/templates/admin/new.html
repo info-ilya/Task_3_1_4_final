@@ -16,24 +16,33 @@
         </div>
         <table>
             <tr>
-                <td><label for="userName">Логин</label></td>
-                <td><input type="text" th:field="*{userName}" id="userName"></td>
-            </tr>
-            <tr>
-                <td><label for="pass">Пароль</label></td>
-                <td><input type="text" th:field="*{password}" id="pass"></td>
-            </tr>
-            <tr>
-                <td><label for="firstName">Имя</label></td>
+                <td><label for="firstName">First Name</label></td>
                 <td><input type="text" th:field="*{firstName}" id="firstName"></td>
             </tr>
             <tr>
-                <td><label for="lastName">Фамилия</label></td>
+                <td><label for="lastName">Last Name</label></td>
                 <td><input type="text" th:field="*{lastName}" id="lastName"></td>
+            </tr>
+            <tr>
+                <td><label for="age">Age</label></td>
+                <td><input type="text" th:field="*{age}" id="age"></td>
+            </tr>
+            <tr>
+                <td><label for="pass">Password</label></td>
+                <td><input type="text" th:field="*{password}" id="pass"></td>
             </tr>
             <tr>
                 <td><label for="email">Email</label></td>
                 <td><input type="text" th:field="*{email}" id="email"></td>
+            </tr>
+            <tr>
+                <td><label>Role</label></td>
+                <td>
+                    <label th:each="item : ${roles}">
+                        <input type="checkbox" th:field="*{roles}" th:value="${item}"/>
+                        <label th:text="${item.name}">Test</label>
+                    </label>
+                </td>
             </tr>
             <tr>
                 <td style="text-align: center" colspan="2"><input type="submit" value="Добавить"/></td>

@@ -12,23 +12,38 @@
     <h2>Изменить пользователя</h2>
     <form th:method="POST" th:action="@{/edit}" th:object="${user}">
         <table>
-            <input type="hidden" th:field="*{id}"/>
-            <input th:default="*{password}" type="hidden" th:field="*{password}"/>
             <tr>
-                <td><label for="userName">Username</label></td>
-                <td><input type="text" th:field="*{userName}" id="userName"></td>
+                <td><label for="id">Id</label></td>
+                <td><input type="text" th:field="*{id}" id="id" readonly></td>
             </tr>
             <tr>
-                <td><label for="firstName">Firstname</label></td>
+                <td><label for="firstName">First Name</label></td>
                 <td><input type="text" th:field="*{firstName}" id="firstName"></td>
             </tr>
             <tr>
-                <td><label for="lastName">Lastname</label></td>
+                <td><label for="lastName">Last Name</label></td>
                 <td><input type="text" th:field="*{lastName}" id="lastName"></td>
+            </tr>
+            <tr>
+                <td><label for="age">Age</label></td>
+                <td><input type="text" th:field="*{age}" id="age"></td>
             </tr>
             <tr>
                 <td><label for="email">Email</label></td>
                 <td><input type="text" th:field="*{email}" id="email"></td>
+            </tr>
+            <tr>
+                <td><label for="password">Password</label></td>
+                <td><input type="text" th:field="*{password}" id="password"></td>
+            </tr>
+            <tr>
+                <td><label>Roles</label></td>
+                <td>
+                    <label th:each="item : ${roles}">
+                        <input type="checkbox" th:field="*{roles}" th:value="${item}"/>
+                        <label th:text="${item.name}">Test</label>
+                    </label>
+                </td>
             </tr>
             <tr>
                 <td style="text-align: center" colspan="2"><input type="submit" value="Отправить"></td>

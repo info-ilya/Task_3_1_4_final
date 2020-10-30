@@ -25,14 +25,14 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException {
 
-        User theUser = userService.findByName(authentication.getName());
+        User theUser = userService.findByEmail(authentication.getName());
         HttpSession session = request.getSession();
         session.setAttribute("user", theUser);
 
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-        if (roles.contains("ROLE_ADMIN")) {
+        if (roles.contains("ADMIN")) {
             response.sendRedirect("/admin/admin");
-        } else if (roles.contains("ROLE_USER")) {
+        } else if (roles.contains("USER")) {
             response.sendRedirect("/user/user");
         } else {
             response.sendRedirect(request.getContextPath() + "/");

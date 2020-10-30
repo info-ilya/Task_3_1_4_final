@@ -9,22 +9,24 @@
     <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
-<div sec:authorize="hasRole('USER')" style="text-align: center">
-    <h2>Пользователь: <span th:utext="${session.user.userName}"/></h2>
+<div sec:authorize="hasAuthority('USER')" style="text-align: center">
+    <h2>Пользователь: <span th:utext="${session.user.email}"/></h2>
     <table>
         <tr>
             <th>ID</th>
-            <th>Логин</th>
-            <th>Имя</th>
-            <th>Фамилия</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
             <th>Email</th>
+            <th>Role</th>
         </tr>
         <tr>
             <td th:utext="${session.user.id}"/>
-            <td th:utext="${session.user.userName}"/>
             <td th:utext="${session.user.firstName}"/>
             <td th:utext="${session.user.lastName}"/>
+            <td th:utext="${session.user.age}"/>
             <td th:utext="${session.user.email}"/>
+            <td th:utext="${session.user.roles}"/>
         </tr>
     </table>
     <br><br>
