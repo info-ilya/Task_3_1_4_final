@@ -32,7 +32,6 @@ public class User{
     @Column(name = "email", unique = true)
     private String email;
 
-//    @ManyToMany(cascade = CascadeType.MERGE)
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
