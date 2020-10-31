@@ -81,7 +81,7 @@
                                     <td th:utext="${user.email}">Email</td>
                                     <td th:utext="${user.age}">Age</td>
                                     <td th:utext="${user.roles}">Role</td>
-                                    <td><a class="btn btn-info btn-sm" th:href="@{/edit(name=${user.email})}">Edit</a>
+                                    <td><a th:href="@{/findone/(id=${user.id})}" class="btn btn-info btn-sm eBtn">Edit</a>
                                     </td>
                                     <td><a class="btn btn-danger btn-sm" th:href="@{/del(id=${user.id})}">Delete</a>
                                     </td>
@@ -101,9 +101,67 @@
         </div>
     </div>
 
+    <div class="myModal">
+        <form method="post" th:action="@{/edituser}">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit user</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="id" class="col-form-label">Id</label>
+                            <input name="id" type="text" class="form-control" id="id"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName" class="col-form-label">First Name</label>
+                            <input name="firstName" type="text" class="form-control" id="firstName"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="col-form-label">Last Name</label>
+                            <input name="lastName" type="text" class="form-control" id="lastName"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="age" class="col-form-label">Age</label>
+                            <input name="age" type="text" class="form-control" id="age"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-form-label">Email</label>
+                            <input name="email" type="text" class="form-control" id="email"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-form-label">Password</label>
+                            <input name="password" type="text" class="form-control" id="password"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="roles" class="col-form-label">Role</label>
+                            <select name="roles" id="roles" class="form-control">
+                                <option name="roles" value=""/>
+                            </select>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+                        </div>
+                    </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="save"/>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.js"></script>
+    <script src="/js/main.js"></script>
+
     <script>
         $('#myList a').on('click', function (e) {
             e.preventDefault()
