@@ -1,0 +1,52 @@
+<div class="myModalNew">
+    <div id="exampleModalNew">
+        <div class="header">
+            <h5>Add new user</h5>
+        </div>
+        <div class="container-fluid w-75 border">
+            <form method="post" th:action="@{/newuser}">
+                <div th:if="${registrationError}">
+                    <span class="ui-state-error" th:text="${registrationError}"></span>
+                </div>
+                <div class="form-group text-center w-50 mx-auto">
+                    <label for="firstName" class="col-form-label font-weight-bold">First Name</label>
+                    <input name="firstName" type="text" class="form-control" id="firstName" value=""/>
+                </div>
+                <div class="form-group text-center w-50 mx-auto font-weight-bold">
+                    <label for="lastName" class="col-form-label">Last Name</label>
+                    <input name="lastName" type="text" class="form-control" id="lastName" value=""/>
+                </div>
+                <div class="form-group text-center w-50 mx-auto font-weight-bold">
+                    <label for="age" class="col-form-label">Age</label>
+                    <input name="age" type="text" class="form-control" id="age" value=""/>
+                </div>
+                <div class="form-group text-center w-50 mx-auto font-weight-bold">
+                    <label for="email" class="col-form-label">Email</label>
+                    <input name="email" type="text" class="form-control" id="email" value=""/>
+                </div>
+                <div class="form-group text-center w-50 mx-auto font-weight-bold">
+                    <label for="password" class="col-form-label">Password</label>
+                    <input name="password" type="password" class="form-control" id="password" value=""/>
+                </div>
+                <!--                        <div class="form-group">-->
+                <!--                            <label for="roles" class="col-form-label">Roles</label>-->
+                <!--                            <input name="roles" type="text" class="form-control" id="roles"/>-->
+                <!--                        </div>-->
+                <div class="form-group text-center w-50 mx-auto font-weight-bold">
+                    <label for="roles" class="col-form-label">Role</label>
+<!--                    <select th:each="item : ${roles}" th:field="*{roles}" th:value="${item}" name="roles" id="roles"-->
+<!--                            class="custom-select" value="" multiple>-->
+<!--                        <option th:text="${item.name}"></option>-->
+<!--                    </select>-->
+                                                <th:block  th:each="item : ${roles}">
+                                                    <input name="roles" id="roles" type="checkbox" th:field="*{roles}" th:value="${item}"/>
+                                                    <label th:text="${item.name}">Test</label>
+                                                </th:block>
+                </div>
+                <div class="form-group text-center w-50 mx-auto font-weight-bold">
+                    <input type="submit" class="btn btn-success bt-lg" value="Add new user"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
