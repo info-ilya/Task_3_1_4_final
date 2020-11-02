@@ -1,5 +1,5 @@
-$(document).ready(function (){
-    $('.table .eBtn').on('click', function (event){
+$(document).ready(function () {
+    $('.table .eBtn').on('click', function (event) {
         event.preventDefault();
         var href = $(this).attr('href');
 
@@ -11,8 +11,10 @@ $(document).ready(function (){
             $('.myModal #age').val(user.age);
             $('.myModal #email').val(user.email);
             $('.myModal #password').val(user.password);
-            $('.myModal #roles').val(user.roles);
-
+            // $.each(user.roles, function(key, value) {
+            //     $('.myModal #roles').append('<option value="' + key + '">' + value + '</option>');
+            // });
+            $('.myModal #roles').val(JSON.stringify(user.roles));
         })
 
         $('.myModal #exampleModal').modal();

@@ -4,12 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.spring.model.Role;
 import ru.spring.repository.RoleRepository;
 import ru.spring.service.UserService;
 import ru.spring.model.User;
-
-import java.util.Set;
 
 @Controller
 public class AdminController {
@@ -32,6 +29,7 @@ public class AdminController {
     @GetMapping("/admin/admin")
     public String allUsers(Model model) {
         model.addAttribute("usersList", userService.findAllUsers());
+        model.addAttribute("roles", roleRepository.findAll());
         return "admin/admin";
     }
 
@@ -40,12 +38,12 @@ public class AdminController {
 //        return "admin/userinfo";
 //    }
 //
-//    @GetMapping("/{name}")
-//    public String showSingleUserInfo(@PathVariable("name") String name, Model model) {
-//        model.addAttribute("user", userService.findByEmail(name));
-//        return "admin/userinfo";
-//    }
-//
+    @GetMapping("/{name}")
+    public String showSingleUserInfo(@PathVariable("name") String name, Model model) {
+        model.addAttribute("user", userService.findByEmail(name));
+        return "admin/admin";
+    }
+
 //    @GetMapping("/del")
 //    public String deleteUser(@RequestParam(name = "id") Long id) {
 //        userService.deleteUserById(id);
