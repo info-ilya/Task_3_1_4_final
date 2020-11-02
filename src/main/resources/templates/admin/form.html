@@ -42,6 +42,13 @@
                                                     <input name="roles" id="roles" type="checkbox" th:field="*{roles}" th:value="${item}"/>
                                                     <label th:text="${item.name}">Test</label>
                                                 </th:block>
+
+
+<!--                    <label>-->
+<!--                        <select multiple required size="2" th:name="roles" th:value="*{roles}">-->
+<!--                            <option th:each="role : ${user.roles}" th:value="${role}" th:text="${role}"></option>-->
+<!--                        </select>-->
+<!--                    </label>-->
                 </div>
                 <div class="form-group text-center w-50 mx-auto font-weight-bold">
                     <input type="submit" class="btn btn-success bt-lg" value="Add new user"/>

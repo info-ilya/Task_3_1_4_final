@@ -1,48 +1,45 @@
-<div class="modal fade myModal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+<div class="modal fade deleteModalNew" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel1"
      aria-hidden="true">
-    <form method="post" th:action="@{/edituser}">
+    <form method="get" th:action="@{/delete/(id1=${user.id})}">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit user</h5>
+                    <h5 class="modal-title">Delete user</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group text-center w-50 mx-auto">
-                        <label for="id" class="col-form-label">Id</label>
-                        <input name="id" type="text" class="form-control" id="id" value="" readonly/>
+                        <label for="id1" class="col-form-label">Id</label>
+                        <input name="id1" type="text" class="form-control" id="id1" value="" readonly/>
                     </div>
                     <div class="form-group text-center w-50 mx-auto">
-                        <label for="firstName" class="col-form-label">First Name</label>
-                        <input name="firstName" type="text" class="form-control" id="firstName" value=""/>
+                        <label for="firstName1" class="col-form-label">First Name</label>
+                        <input name="firstName1" type="text" class="form-control" id="firstName1" value="" readonly/>
                     </div>
                     <div class="form-group text-center w-50 mx-auto">
-                        <label for="lastName" class="col-form-label">Last Name</label>
-                        <input name="lastName" type="text" class="form-control" id="lastName" value=""/>
+                        <label for="lastName1" class="col-form-label">Last Name</label>
+                        <input name="lastName1" type="text" class="form-control" id="lastName1" value="" readonly/>
                     </div>
                     <div class="form-group text-center w-50 mx-auto">
-                        <label for="age" class="col-form-label">Age</label>
-                        <input name="age" type="text" class="form-control" id="age" value=""/>
+                        <label for="age1" class="col-form-label">Age</label>
+                        <input name="age1" type="text" class="form-control" id="age1" value="" readonly/>
                     </div>
                     <div class="form-group text-center w-50 mx-auto">
-                        <label for="email" class="col-form-label">Email</label>
-                        <input name="email" type="text" class="form-control" id="email" value=""/>
+                        <label for="email1" class="col-form-label">Email</label>
+                        <input name="email1" type="text" class="form-control" id="email1" value="" readonly/>
                     </div>
-                    <div class="form-group text-center w-50 mx-auto">
-                        <label for="password" class="col-form-label">Password</label>
-                        <input name="password" type="password" class="form-control" id="password" value=""/>
-                    </div>
+
                     <!--                        <div class="form-group">-->
                     <!--                            <label for="roles" class="col-form-label">Roles</label>-->
                     <!--                            <input name="roles" type="text" class="form-control" id="roles"/>-->
                     <!--                        </div>-->
                     <div class="form-group text-center w-50 mx-auto">
-                        <label for="roles" class="col-form-label">Role</label>
+                        <label for="roles1" class="col-form-label">Role</label>
                         <!--                            <select name="roles" id="roles" class="custom-select" multiple>-->
                         <!--                            </select>-->
-                        <input name="roles" type="text" class="form-control" id="roles"/>
+                        <input name="roles1" type="text" class="form-control" id="roles1" value="" readonly/>
                         <!--                            <th:block  th:each="item : ${roles}">-->
                         <!--                                <input name="roles" id="roles" type="checkbox" th:field="*{roles}" th:value="${item}"/>-->
                         <!--                                <label th:text="${item.name}">Test</label>-->
@@ -51,10 +48,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Edit"/>
+<!--                    <a th:href="@{/delete/(id=${user.id})}" id="delRef" class="btn btn-danger">Delete</a>-->
+                    <input type="submit" id="delRef" class="btn btn-danger" value="Delete"/>
                 </div>
             </div>
         </div>
     </form>
 </div>
-
