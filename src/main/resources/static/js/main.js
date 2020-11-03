@@ -21,14 +21,14 @@ $(document).ready(function () {
                 $('.myModal #password').val(user.password);
 
                 $('.myModal #roles').empty();
-                $.each(user.roles, function(i, role) {
-                // $('.myModal #roles').append('<option value="' + i + '">' + role.name + '</option>');
-                $('.myModal #roles').append('<option value="' + role.name + '">' + role.name + '</option>');
+                $.each(user.roles, function (i, role) {
+                    // $('.myModal #roles').append('<option value="' + i + '">' + role.name + '</option>');
+                    $('.myModal #roles').append('<option value="' + role.name + '">' + role.name + '</option>');
                 });
 
                 // $('#getResultDiv ul').empty();
                 // $.each(user.roles, function(i, role){
-                    ////var role = "- Customer with Id = " + i + ", firstname = " + role.name;
+                ////var role = "- Customer with Id = " + i + ", firstname = " + role.name;
                 //     $('#getResultDiv .list-group').append(role.name).append(" ")
                 // });
 
@@ -48,11 +48,9 @@ $(document).ready(function () {
             $('.deleteModalNew #age1').val(user.age);
             $('.deleteModalNew #email1').val(user.email);
             $('.deleteModalNew #roles1').empty();
-            $.each(user.roles, function(i, role) {
-                $('.deleteModalNew #roles1').append('<option value="' + i + '">' + role.name + '</option>');
+            $.each(user.roles, function (i, role) {
+                $('.deleteModalNew #roles1').append('<option value="' + role.name + '">' + role.name + '</option>');
             });
-
-            //$('.deleteModalNew #roles1').val(JSON.stringify(user.roles));
         })
         //$('.deleteModalNew #delRef').attr('href', href);
         $('#deleteModal').modal();
