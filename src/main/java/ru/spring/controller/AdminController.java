@@ -40,15 +40,9 @@ public class AdminController {
         return "redirect:/admin/admin";
     }
 
-    @GetMapping("/{name}")
-    public String showSingleUserInfo(@PathVariable("name") String name, Model model) {
-        model.addAttribute("user", userService.findByEmail(name));
-        return "admin/admin";
-    }
-
     @PostMapping("/newuser")
     public String registerNewUser(@ModelAttribute("user") User user, Model model) {
-        model.addAttribute("roles", roleRepository.findAll());
+        //model.addAttribute("roles", roleRepository.findAll());
 
         User existing = userService.findByEmail(user.getEmail());
         if (existing != null) {
@@ -65,6 +59,12 @@ public class AdminController {
     public String deleteUser(@RequestParam(name = "id1") Long id) {
         userService.deleteUserById(id);
         return "redirect:/admin/admin";
+    }
+
+    @GetMapping("/{name}")
+    public String showSingleUserInfo(@PathVariable("name") String name, Model model) {
+        model.addAttribute("user", userService.findByEmail(name));
+        return "admin/admin";
     }
 
     //new del

@@ -23,7 +23,7 @@ $(document).ready(function () {
                 $('.myModal #roles').empty();
                 $.each(user.roles, function (i, role) {
                     // $('.myModal #roles').append('<option value="' + i + '">' + role.name + '</option>');
-                    $('.myModal #roles').append('<option value="' + role.name + '">' + role.name + '</option>');
+                    $('.myModal #roles').append('<option selected value="' + role.name + '">' + role.name + '</option>');
                 });
 
                 // $('#getResultDiv ul').empty();
@@ -31,8 +31,6 @@ $(document).ready(function () {
                 ////var role = "- Customer with Id = " + i + ", firstname = " + role.name;
                 //     $('#getResultDiv .list-group').append(role.name).append(" ")
                 // });
-
-                //$('.myModal #roles').val(JSON.stringify(user.roles));
             })
             $('#exampleModal').modal();
         }
