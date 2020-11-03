@@ -40,14 +40,22 @@
                     <!--                        </div>-->
                     <div class="form-group text-center w-50 mx-auto">
                         <label for="roles" class="col-form-label">Role</label>
-                        <!--                            <select name="roles" id="roles" class="custom-select" multiple>-->
-                        <!--                            </select>-->
-                        <input name="roles" type="text" class="form-control" id="roles"/>
+                        <!--                        <input name="roles" type="text" class="form-control" id="roles"/>-->
+                        <select name="roles" id="roles" class="custom-select" multiple>
+                        </select>
                         <!--                            <th:block  th:each="item : ${roles}">-->
                         <!--                                <input name="roles" id="roles" type="checkbox" th:field="*{roles}" th:value="${item}"/>-->
                         <!--                                <label th:text="${item.name}">Test</label>-->
                         <!--                            </th:block>-->
                     </div>
+
+
+                    <div id="getResultDiv" style="padding:20px 10px 20px 50px">
+                        <ul class="list-group">
+                        </ul>
+                    </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -1,23 +1,3 @@
-// $(document).ready(function () {
-//     $('.table .eBtn').on('click', function (event) {
-//         event.preventDefault();
-//         var href = $(this).attr('href');
-//         $.get(href, function (user, status) {
-//             $('.myModal #id').val(user.id);
-//             $('.myModal #firstName').val(user.firstName);
-//             $('.myModal #lastName').val(user.lastName);
-//             $('.myModal #age').val(user.age);
-//             $('.myModal #email').val(user.email);
-//             $('.myModal #password').val(user.password);
-//             // $.each(user.roles, function(key, value) {
-//             //     $('.myModal #roles').append('<option value="' + key + '">' + value + '</option>');
-//             // });
-//             $('.myModal #roles').val(JSON.stringify(user.roles));
-//         })
-//
-//         $('.myModal #exampleModal').modal();
-//     });
-// });
 $('#myList a').on('click', function (e) {
     e.preventDefault();
     $(this).tab('show');
@@ -39,10 +19,20 @@ $(document).ready(function () {
                 $('.myModal #age').val(user.age);
                 $('.myModal #email').val(user.email);
                 $('.myModal #password').val(user.password);
-                // $.each(user.roles, function(key, value) {
-                //     $('.myModal #roles').append('<option value="' + key + '">' + value + '</option>');
+
+                $('.myModal #roles').empty();
+                $.each(user.roles, function(i, role) {
+                // $('.myModal #roles').append('<option value="' + i + '">' + role.name + '</option>');
+                $('.myModal #roles').append('<option value="' + role.name + '">' + role.name + '</option>');
+                });
+
+                // $('#getResultDiv ul').empty();
+                // $.each(user.roles, function(i, role){
+                    ////var role = "- Customer with Id = " + i + ", firstname = " + role.name;
+                //     $('#getResultDiv .list-group').append(role.name).append(" ")
                 // });
-                $('.myModal #roles').val(JSON.stringify(user.roles));
+
+                //$('.myModal #roles').val(JSON.stringify(user.roles));
             })
             $('#exampleModal').modal();
         }
@@ -57,10 +47,12 @@ $(document).ready(function () {
             $('.deleteModalNew #lastName1').val(user.lastName);
             $('.deleteModalNew #age1').val(user.age);
             $('.deleteModalNew #email1').val(user.email);
-            // $.each(user.roles, function(key, value) {
-            //     $('.myModal #roles').append('<option value="' + key + '">' + value + '</option>');
-            // });
-            $('.deleteModalNew #roles1').val(JSON.stringify(user.roles));
+            $('.deleteModalNew #roles1').empty();
+            $.each(user.roles, function(i, role) {
+                $('.deleteModalNew #roles1').append('<option value="' + i + '">' + role.name + '</option>');
+            });
+
+            //$('.deleteModalNew #roles1').val(JSON.stringify(user.roles));
         })
         //$('.deleteModalNew #delRef').attr('href', href);
         $('#deleteModal').modal();
