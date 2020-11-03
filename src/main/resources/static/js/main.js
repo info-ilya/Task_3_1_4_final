@@ -61,4 +61,19 @@ $(document).ready(function () {
         })
         $('#deleteModal').modal();
     });
+
+    $('.userBtn').on('click', function (event) {
+        event.preventDefault();
+        var href = $(this).attr('href');
+        $.get(href, function (user, status) {
+            $('.userinfotable #idTable').val(user.id);
+            $('.deleteModalNew #firstTable').val(user.firstName);
+            $('.deleteModalNew #lastTable').val(user.lastName);
+            $('.deleteModalNew #emailTable').val(user.age);
+            $('.deleteModalNew #ageTable').val(user.email);
+            $('.deleteModalNew #rolesTable').empty();
+
+        });
+    });
+
 });

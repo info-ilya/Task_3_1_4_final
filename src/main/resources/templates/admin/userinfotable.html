@@ -1,0 +1,38 @@
+<div class="table-responsive">
+    <table id="userinfotable" class="table table-striped table-sm">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Role</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td id="idTable">ID</td>
+            <td id="firstTable">Firstname</td>
+            <td id="lastTable">Lastname</td>
+            <td id="emailTable">Email</td>
+            <td id="ageTable">Age</td>
+            <td id="rolesTable">Roles</td>
+            <td><a th:href="@{/findone/(id=${user.id})}"
+                   class="btn btn-info btn-sm eBtn">Edit</a>
+
+                <!--    Edit Modal-->
+                <div th:include="admin/editmodal"></div>
+            </td>
+            <td><a th:href="@{/findone/(id=${user.id})}"
+                   class="btn btn-danger btn-sm delBtn">Delete</a>
+
+                <!--    Delete modal-->
+                <div th:include="/admin/deletemodal"></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

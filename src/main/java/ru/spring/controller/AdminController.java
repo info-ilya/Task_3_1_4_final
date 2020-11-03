@@ -23,7 +23,7 @@ public class AdminController {
 
     @GetMapping("/findone")
     @ResponseBody
-    public User findOne(Long id){
+    public User findOne(Long id) {
         return userService.findById(id);
     }
 
@@ -96,7 +96,6 @@ public class AdminController {
 //        userService.updateUser(user);
 //        return "redirect:/admin/admin";
 //    }
-
 
 
 //    @GetMapping("/admin/form")
