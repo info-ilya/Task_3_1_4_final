@@ -88,7 +88,6 @@
                                         <!--    Edit Modal-->
                                         <div th:include="admin/editmodal"></div>
                                     </td>
-                                    <!--<td><a th:href="@{/del(id=${user.id})}" class="btn btn-danger btn-sm dBtn">Delete</a>-->
                                     <td><a th:href="@{/findone/(id=${user.id})}"
                                            class="btn btn-danger btn-sm delBtn">Delete</a>
 
@@ -101,6 +100,7 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="newuser" role="tabpanel">
+
                         <!--    New user form -->
                         <div th:include="/admin/newuserform"></div>
                     </div>

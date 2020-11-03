@@ -64,7 +64,7 @@ public class AdminController {
     @GetMapping("/{name}")
     public String showSingleUserInfo(@PathVariable("name") String name, Model model) {
         model.addAttribute("user", userService.findByEmail(name));
-        return "admin/admin";
+        return "admin/userinfo";
     }
 
     //new del
