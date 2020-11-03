@@ -11,7 +11,7 @@ $(document).ready(function () {
         event.preventDefault();
         var href = $(this).attr('href');
         var text = $(this).text();
-        if (text == 'Edit') {
+        if (text === 'Edit') {
             $.get(href, function (user, status) {
                 $('.myModal #id').val(user.id);
                 $('.myModal #firstName').val(user.firstName);
@@ -20,17 +20,26 @@ $(document).ready(function () {
                 $('.myModal #email').val(user.email);
                 $('.myModal #password').val(user.password);
 
+                let roleAdmin = null;
+                let roleUser = null;
+
                 $('.myModal #roles').empty();
+
                 $.each(user.roles, function (i, role) {
                     // $('.myModal #roles').append('<option value="' + i + '">' + role.name + '</option>');
-                    $('.myModal #roles').append('<option selected value="' + role.name + '">' + role.name + '</option>');
+                    //$('.myModal #roles').append('<option selected value="' + role.name + '">' + role.name + '</option>');
+                    if (role.name === 'ADMIN') {
+                        roleAdmin = "ADMIN";
+                    } else {
+                        roleUser = "USER";
+                    }
                 });
+                if (roleUser === 'USER') {
+                    $('.myModal #roles').append('<option selected value="USER">USER</option>').append('<option value="ADMIN">ADMIN</option>');
+                } else if (roleAdmin === 'ADMIN') {
+                    $('.myModal #roles').append('<option selected value="ADMIN">ADMIN</option>').append('<option value="USER">USER</option>');
+                }
 
-                // $('#getResultDiv ul').empty();
-                // $.each(user.roles, function(i, role){
-                ////var role = "- Customer with Id = " + i + ", firstname = " + role.name;
-                //     $('#getResultDiv .list-group').append(role.name).append(" ")
-                // });
             })
             $('#exampleModal').modal();
         }
@@ -50,7 +59,6 @@ $(document).ready(function () {
                 $('.deleteModalNew #roles1').append('<option value="' + role.name + '">' + role.name + '</option>');
             });
         })
-        //$('.deleteModalNew #delRef').attr('href', href);
         $('#deleteModal').modal();
     });
 });
