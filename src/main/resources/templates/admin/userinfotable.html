@@ -9,7 +9,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="/css/dashboard.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 <nav class="navbar navbar-dark bg-dark flex-md-nowrap shadow">
     <span class="navbar-text">
     <b th:utext="${user.getEmail()}">with</b>
@@ -25,34 +25,35 @@
 
 <div class="container-fluid">
     <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" th:href="@{admin}">All users</a></li>
-                    <li class="nav-item" th:each="user : ${usersList}">
-                        <a class="nav-link text-capitalize userBtn" th:utext="${user.firstName}"
-                           th:href="@{/{name}(name=${user.email})}"
-                           th:classappend="${currentuser}==(${user.email}) ? 'active': '' "></a>
-                    </li>
-                </ul>
+        <nav class="nav flex-column col-md-2 d-md-block sidebar pt-3 bg-white border-right">
+            <ul class="list-group border-right">
+                <li><a class="list-group-item list-group-item-action border-0" th:href="@{admin}">All users</a></li>
+                <li th:each="user : ${usersList}">
+                    <a class="list-group-item list-group-item-action text-capitalize border-0 userBtn"
+                       th:utext="${user.firstName}"
+                       th:href="@{/{name}(name=${user.email})}"
+                       th:classappend="${currentuser}==(${user.email}) ? 'active': '' ">
+                    </a>
+                </li>
+            </ul>
         </nav>
-    <div class="sidebar-sticky"></div>
+        <div class="sidebar-sticky"></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <br>
             <h2>Admin panel</h2>
-            <ul class="nav nav-tabs mt-5" id="myTabs">
+            <ul class="nav nav-tabs" id="myTabs">
                 <li class="nav-item"><a href="#home" role="tab" data-toggle="list" class="nav-link active">Users
                     table</a></li>
                 <li class="nav-item"><a href="#newuser" role="tab" data-toggle="list" class="nav-link nBtn">New
                     User</a>
                 </li>
             </ul>
-            <div class="tab-content pt-3">
-                <div class="tab-pane active" id="home" role="tabpanel">
-                    <h5>User: <span th:utext="${user.email}"></span></h5>
-                    <br>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-sm">
+            <div class="tab-content pt-3 border">
+                <div class="tab-pane active bg-white" id="home" role="tabpanel">
+                    <h5 class="pl-3 py-2 border-bottom bg-light">User: <span th:utext="${user.email}"></span></h5>
+                    <div class="table-responsive px-3 py-3">
+                        <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th>ID</th>

@@ -9,7 +9,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="/css/dashboard.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 <nav class="navbar navbar-dark bg-dark flex-md-nowrap shadow">
     <span class="navbar-text">
     <b th:utext="${session.user.getEmail()}">with</b>
@@ -26,7 +26,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <nav class="nav flex-column col-md-2 d-md-block sidebar pt-3 bg-light border-right">
+        <nav class="nav flex-column col-md-2 d-md-block sidebar pt-3 bg-white border-right">
             <ul class="list-group">
                 <li class="list-group-item list-group-item-action active text-capitalize"
                     th:utext="${session.user.firstName}"></li>
@@ -37,9 +37,9 @@
             <br>
             <h2><span class="text-capitalize" th:utext="${session.user.firstName}"></span> information page</h2>
             <div class="tab-content pt-3 border">
-                <div class="tab-pane active">
-                    <h5 class="pl-3 py-2 border-bottom">About user</h5>
-                    <div class="table-responsive px-3 pb-3">
+                <div class="tab-pane active bg-white">
+                    <h5 class="pl-3 py-2 border-bottom bg-light">About user</h5>
+                    <div class="table-responsive px-3 py-3">
                         <table class="table table-striped">
                             <thead>
                             <tr>
