@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group text-center w-25 mx-auto font-weight-bold">
                     <label for="roles" class="col-form-label">Role</label>
-                    <select th:value="*{roles}" name="roles" id="roles"
+                    <select size="2" th:value="*{roles}" name="roles" id="roles"
                             class="custom-select" multiple>
                         <option th:each="item : ${roles}" th:text="${item.name}"></option>
                     </select>
