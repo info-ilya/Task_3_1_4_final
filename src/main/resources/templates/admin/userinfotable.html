@@ -26,17 +26,16 @@
 <div class="container-fluid">
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" th:href="@{admin/admin}">All users</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{admin}">All users</a></li>
                     <li class="nav-item" th:each="user : ${usersList}">
                         <a class="nav-link text-capitalize userBtn" th:utext="${user.firstName}"
                            th:href="@{/{name}(name=${user.email})}"
                            th:classappend="${currentuser}==(${user.email}) ? 'active': '' "></a>
                     </li>
                 </ul>
-            </div>
         </nav>
+    <div class="sidebar-sticky"></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <br>

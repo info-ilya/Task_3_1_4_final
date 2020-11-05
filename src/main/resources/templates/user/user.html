@@ -1,38 +1,76 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Информация о пользователе</title>
-    <link href="/css/style.css" rel="stylesheet">
+    <title>User info</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/css/dashboard.css" rel="stylesheet">
 </head>
 <body>
-<div sec:authorize="hasAuthority('USER')" style="text-align: center">
-    <h2>Пользователь: <span th:utext="${session.user.email}"/></h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Age</th>
-            <th>Email</th>
-            <th>Role</th>
-        </tr>
-        <tr>
-            <td th:utext="${session.user.id}"/>
-            <td th:utext="${session.user.firstName}"/>
-            <td th:utext="${session.user.lastName}"/>
-            <td th:utext="${session.user.age}"/>
-            <td th:utext="${session.user.email}"/>
-            <td th:utext="${session.user.roles}"/>
-        </tr>
-    </table>
-    <br><br>
-    <form th:action="@{/logout}" method="POST">
-        <input type="submit" value="Logout"/>
-    </form>
+<nav class="navbar navbar-dark bg-dark flex-md-nowrap shadow">
+    <span class="navbar-text">
+    <b th:utext="${session.user.getEmail()}">with</b>
+    <span>with roles: </span>
+        <span th:each="authority : ${#authentication.getAuthorities()}"
+              th:text="${authority.getAuthority()} +' '"></span>
+</span>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" th:href="@{/logout}">Logout</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="nav flex-column col-md-2 d-md-block sidebar pt-3 bg-light border-right">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-action active text-capitalize"
+                    th:utext="${session.user.firstName}"></li>
+            </ul>
+        </nav>
+        <div class="sidebar-sticky"></div>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <br>
+            <h2><span class="text-capitalize" th:utext="${session.user.firstName}"></span> information page</h2>
+            <div class="tab-content pt-3 border">
+                <div class="tab-pane active">
+                    <h5 class="pl-3 py-2 border-bottom">About user</h5>
+                    <div class="table-responsive px-3 pb-3">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Age</th>
+                                <th>Role</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td th:utext="${session.user.id}"/>
+                                <td th:utext="${session.user.firstName}"/>
+                                <td th:utext="${session.user.lastName}"/>
+                                <td th:utext="${session.user.age}"/>
+                                <td th:utext="${session.user.email}"/>
+                                <td th:each="role : ${session.user.roles}" th:text="${role.name}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>

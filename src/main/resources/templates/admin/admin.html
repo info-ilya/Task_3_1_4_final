@@ -20,10 +20,8 @@
         <!--               th:if="${authority.getAuthority().startsWith('ROLE_')}"-->
         <!--               th:text="${authority.getAuthority().replaceFirst('ROLE_', ' ')}">-->
         <!--    </span>-->
-                <span th:each="authority : ${#authentication.getAuthorities()}"
-                      th:text="${authority.getAuthority()} +' '">
-    </span>
-
+        <span th:each="authority : ${#authentication.getAuthorities()}"
+              th:text="${authority.getAuthority()} +' '"></span>
 </span>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
@@ -50,18 +48,18 @@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <br>
                 <h2>Admin panel</h2>
-                <ul class="nav nav-tabs mt-5" id="myTabs">
+                <ul class="nav nav-tabs" id="myTabs">
                     <li class="nav-item"><a href="#home" role="tab" data-toggle="list" class="nav-link active">Users
                         table</a></li>
                     <li class="nav-item"><a href="#newuser" role="tab" data-toggle="list" class="nav-link nBtn">New
                         User</a>
                     </li>
                 </ul>
-                <div class="tab-content pt-3">
+                <div class="tab-content pt-3 border">
                     <div class="tab-pane active" id="home" role="tabpanel">
-                        <h5>All users</h5>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-sm">
+                        <h5 class="pl-3 py-2 border-bottom">All users</h5>
+                        <div class="table-responsive px-3 pb-3">
+                            <table class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
