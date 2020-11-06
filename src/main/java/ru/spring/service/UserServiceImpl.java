@@ -37,25 +37,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(User theUser) {
-        theUser.setPassword(passwordEncoder.encode(theUser.getPassword()));
-        userRepository.save(theUser);
+    public User save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
+
     }
 
     @Override
     public void updateUser(User theUser) {
-        User user = userRepository.findUserByEmail(theUser.getEmail());
-        if (theUser.getPassword().startsWith("$")) {
-            user.setPassword(theUser.getPassword());
-        } else {
-            user.setPassword(passwordEncoder.encode(theUser.getPassword()));
-        }
-        user.setFirstName(theUser.getFirstName());
-        user.setLastName(theUser.getLastName());
-        user.setAge(theUser.getAge());
-        user.setEmail(theUser.getEmail());
-        user.setRoles(theUser.getRoles());
-        userRepository.save(user);
+//        User user = findById(theUser.getId());
+//        if (theUser.getPassword().startsWith("$")) {
+//            user.setPassword(theUser.getPassword());
+//        } else {
+//            user.setPassword(passwordEncoder.encode(theUser.getPassword()));
+//        }
+//        user.setFirstName(theUser.getFirstName());
+//        user.setLastName(theUser.getLastName());
+//        user.setAge(theUser.getAge());
+//        user.setEmail(theUser.getEmail());
+//        user.setRoles(theUser.getRoles());
+//        userRepository.save(user);
     }
 
     @Override

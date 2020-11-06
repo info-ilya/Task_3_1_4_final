@@ -17,11 +17,11 @@ public class AdminController {
     @Autowired
     private RoleRepository roleRepository;
 
-    @GetMapping("/findone")
-    @ResponseBody
-    public User findOne(Long id) {
-        return userService.findById(id);
-    }
+//    @GetMapping("/findone")
+//    @ResponseBody
+//    public User findOne(Long id) {
+//        return userService.findById(id);
+//    }
 
     @GetMapping("/admin")
     public String allUsers(Model model) {
@@ -30,29 +30,29 @@ public class AdminController {
         return "admin/admin";
     }
 
-    @PostMapping("/edituser")
-    public String editUser(User user) {
-        userService.updateUser(user);
-        return "redirect:/admin";
-    }
+//    @PostMapping("/edituser")
+//    public String editUser(User user) {
+//        userService.updateUser(user);
+//        return "redirect:/admin";
+//    }
 
-    @PostMapping("/newuser")
-    public String registerNewUser(@ModelAttribute("user") User user, Model model) {
-        User existing = userService.findByEmail(user.getEmail());
-        if (existing != null) {
-            model.addAttribute("user", new User());
-            model.addAttribute("registrationError", "Такой логин уже зарегистрирован.");
-            return "admin/newuserform";
-        }
-        userService.saveUser(user);
-        return "redirect:/admin";
-    }
+//    @PostMapping("/newuser")
+//    public String registerNewUser(@ModelAttribute("user") User user, Model model) {
+//        User existing = userService.findByEmail(user.getEmail());
+//        if (existing != null) {
+//            model.addAttribute("user", new User());
+//            model.addAttribute("registrationError", "Такой логин уже зарегистрирован.");
+//            return "admin/newuserform";
+//        }
+//        userService.saveUser(user);
+//        return "redirect:/admin";
+//    }
 
-    @GetMapping("/delete")
-    public String deleteUser(@RequestParam(name = "id1") Long id) {
-        userService.deleteUserById(id);
-        return "redirect:/admin";
-    }
+//    @GetMapping("/delete")
+//    public String deleteUser(@RequestParam(name = "id1") Long id) {
+//        userService.deleteUserById(id);
+//        return "redirect:/admin";
+//    }
 
     @GetMapping("/{name}")
     public String showSingleUserInfo(@PathVariable("name") String name, Model model) {

@@ -62,18 +62,88 @@ $(document).ready(function () {
         $('#deleteModal').modal();
     });
 
-    // $('.userBtn').on('click', function (event) {
-    //     event.preventDefault();
-    //     var href = $(this).attr('href');
-    //     $.get(href, function (user, status) {
-    //         $('.userinfotable #idTable').val(user.id);
-    //         $('.deleteModalNew #firstTable').val(user.firstName);
-    //         $('.deleteModalNew #lastTable').val(user.lastName);
-    //         $('.deleteModalNew #emailTable').val(user.age);
-    //         $('.deleteModalNew #ageTable').val(user.email);
-    //         $('.deleteModalNew #rolesTable').empty();
+    // function createUser() {
+    //     fetch('http://localhost:8080/create', {
+    //         method: 'POST',
+    //         body: JSON.stringify({
+    //             name: window.formNewUser.newName.value,
+    //             lastName: window.formNewUser.newLastName.value,
+    //             age: window.formNewUser.newAge.value,
+    //             email: window.formNewUser.newEmail.value,
+    //             password: window.formNewUser.newPassword.value,
+    //             roles: window.formNewUser.newRoles.value
+    //         }),
+    //         headers: {"Content-type": "application/json; charset=UTF-8"}
+    //     })
+    //         .then(response => {
+    //             window.formNewUser.newName.value = "";
+    //             window.formNewUser.newLastName.value = "";
+    //             window.formNewUser.newAge.value = "";
+    //             window.formNewUser.newEmail.value = "";
+    //             window.formNewUser.newPassword.value = "";
+    //             window.formNewUser.newRoles.value = "";
     //
+    //             showAllUsers();
+    //             $('#successful').modal();
+    //         });
+    // }
+
+
+    // DO GET
+    // function ajaxGet(){
+    //     $.ajax({
+    //         type : "GET",
+    //         url : "http://localhost:8080/all",
+    //         success: function(user){
+    //             var taskRow = '<tr>' +
+    //                 '<td>' + user.id + '</td>' +
+    //                 '<td>' + user.firstName + '</td>' +
+    //                 '<td>' + user.lastName + '</td>' +
+    //                 '<td>' + user.age + '</td>' +
+    //                 '<td>' + user.email + '</td>' +
+    //                 '<td>' + user.roles + '</td>' +
+    //                 '</tr>';
+    //             $('#userstable tbody').append(taskRow);
+    //
+    //         },
     //     });
-    // });
+    // }
+
+    $.getJSON("http://localhost:8080/all",
+        function (data) {
+            var userTable = '';
+
+            let arr = [];
+
+            $.each(data, function (key, user) {
+
+                $.each(user.roles, function (i, role) {
+                    arr = role.name;
+                });
+
+                userTable += '<tr>';
+
+                userTable += '<td>' +
+                    user.id + '</td>';
+
+                userTable += '<td>' +
+                    user.firstName + '</td>';
+
+                userTable += '<td>' +
+                    user.lastName + '</td>';
+
+                userTable += '<td>' +
+                    user.email + '</td>';
+
+                userTable += '<td>' +
+                    user.age + '</td>';
+
+                userTable += '<td>' + arr + '</td>';
+
+                userTable += '</tr>';
+            });
+
+            $('#userstable').append(userTable);
+        });
 
 });
