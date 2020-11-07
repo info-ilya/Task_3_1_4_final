@@ -27,13 +27,11 @@ public class UserRestController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    // Получить все user
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.findAllUsers();
     }
 
-    // Получить user по id
     @GetMapping("/users/{user_id}")
     public User findOneUser(@PathVariable Long user_id) {
         if (!userService.isUserExist(userService.findById(user_id))) {
@@ -42,13 +40,6 @@ public class UserRestController {
         return userService.findById(user_id);
     }
 
-    // Получить все roles
-//    @GetMapping("/admin")
-//    public List getAllRoles() {
-//        return roleRepository.findAll();
-//    }
-
-    // Создать нового user
     @PostMapping("/newuser")
 //    public User registerNewUser(@RequestBody User user) {
     public User registerNewUser(User user) {
@@ -61,14 +52,12 @@ public class UserRestController {
         return userService.save(user);
     }
 
-    // Удалить user
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUser(@RequestParam(name = "id1") Long id) {
         userService.deleteUserById(id);
         return ResponseEntity.ok().build();
     }
 
-    // Обновить запись
     @PutMapping("/edituser")
     public void editUser(User user) {
         userService.updateUser(user);
