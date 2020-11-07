@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUserExist(User user) {
-        return findByEmail(user.getEmail()) != null;
+        return findById(user.getId()) != null;
     }
 
     @Override

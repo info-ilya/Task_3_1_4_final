@@ -68,7 +68,7 @@ $(document).ready(function () {
     }
 
     function createUser() {
-        fetch('http://localhost:8080/newuser', {
+        fetch('http://localhost:8080/api/newuser', {
             method: 'POST',
             body: JSON.stringify({
                 firstname: window.formNewUser.firstName.value,
@@ -94,15 +94,15 @@ $(document).ready(function () {
     }
 
 
-    $.getJSON("http://localhost:8080/all",
+    $.getJSON("http://localhost:8080/api/users",
         function (data) {
 
             let userTable = '';
             let arr = [];
             let editBtn =
-                '<a href="/findone/?id=userID" class="btn btn-info btn-sm eBtn">Edit</a>';
+                '<a href="/api/users/user_id" class="btn btn-info btn-sm eBtn">Edit</a>';
             let deleteBtn =
-                '<a href="/findone/?id=userID" class="btn btn-danger btn-sm delBtn">Delete</a>';
+                '<a href="/api/users/user_id" class="btn btn-danger btn-sm delBtn">Delete</a>';
 
             $.each(data, function (key, user) {
 
@@ -117,8 +117,8 @@ $(document).ready(function () {
                 userTable += '<td id="userEmail">' + user.email + '</td>';
                 userTable += '<td id="userAge">' + user.age + '</td>';
                 userTable += '<td id="userRoles">' + arr + '</td>';
-                userTable += '<td id="userEditBtn">' + editBtn.replace('userID', user.id) + '</td>';
-                userTable += '<td id="userDeleteBtn">' + deleteBtn.replace('userID', user.id) + '</td>';
+                userTable += '<td id="userEditBtn">' + editBtn.replace('user_id', user.id) + '</td>';
+                userTable += '<td id="userDeleteBtn">' + deleteBtn.replace('user_id', user.id) + '</td>';
                 userTable += '</tr>';
             });
             $('#userstable').append(userTable);
