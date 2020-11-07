@@ -47,28 +47,16 @@ public class UserRestController {
     }
 
     // Удалить user
-    @DeleteMapping("/delete/{id1}")
-    public ResponseEntity<?> deleteUser(@PathVariable(value = "id1") Long id) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUser(@RequestParam(name = "id1") Long id) {
         userService.deleteUserById(id);
         return ResponseEntity.ok().build();
     }
 
     // Обновить запись
-    @PutMapping("/edituser/{id}")
-    public User editUser(@PathVariable(value = "id") Long id) {
-        User user = userService.findById(id);
-        if (user.getPassword().startsWith("$")) {
-            user.setPassword(user.getPassword());
-        } else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-        user.setFirstName(user.getFirstName());
-        user.setLastName(user.getLastName());
-        user.setAge(user.getAge());
-        user.setEmail(user.getEmail());
-        user.setRoles(user.getRoles());
-
-        return userService.save(user);
+    @PutMapping("/edituser/")
+    public void editUser(User user) {
+        userService.updateUser(user);
     }
 
 }
