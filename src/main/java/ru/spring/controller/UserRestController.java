@@ -1,18 +1,11 @@
 package ru.spring.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.spring.error.UserErrorResponse;
 import ru.spring.error.UserNotFoundException;
 import ru.spring.model.User;
-import ru.spring.repository.RoleRepository;
-import ru.spring.repository.UserRepository;
 import ru.spring.service.UserService;
 
 import java.util.List;
