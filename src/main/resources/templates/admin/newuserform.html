@@ -4,7 +4,8 @@
             <h5 class="pl-3 py-2 border-bottom">Add new user</h5>
         </div>
         <div class="table-responsive">
-            <form method="post" th:action="@{/newuser}">
+<!--            <form method="post" th:action="@{/newuser}">-->
+            <form id="formNewUser" name="formNewUser" th:action="@{/newuser}">
                 <div th:if="${registrationError}">
                     <span class="ui-state-error" th:text="${registrationError}"></span>
                 </div>

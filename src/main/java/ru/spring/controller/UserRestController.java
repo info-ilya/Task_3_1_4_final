@@ -1,5 +1,7 @@
 package ru.spring.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -42,7 +44,14 @@ public class UserRestController {
 
     // Создать нового user
     @PostMapping("/newuser")
-    public User registerNewUser(@RequestBody User user) {
+//    public User registerNewUser(@RequestBody User user) {
+    public User registerNewUser(User user) {
+//        ObjectMapper mapper = new ObjectMapper();
+//        try {
+//            user = mapper.readValue("/newuser", User.class);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
         return userService.save(user);
     }
 

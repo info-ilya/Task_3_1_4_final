@@ -67,65 +67,66 @@ $(document).ready(function () {
         });
     }
 
-    // function createUser() {
-    //     fetch('http://localhost:8080/create', {
-    //         method: 'POST',
-    //         body: JSON.stringify({
-    //             name: window.formNewUser.newName.value,
-    //             lastName: window.formNewUser.newLastName.value,
-    //             age: window.formNewUser.newAge.value,
-    //             email: window.formNewUser.newEmail.value,
-    //             password: window.formNewUser.newPassword.value,
-    //             roles: window.formNewUser.newRoles.value
-    //         }),
-    //         headers: {"Content-type": "application/json; charset=UTF-8"}
-    //     })
-    //         .then(response => {
-    //             window.formNewUser.newName.value = "";
-    //             window.formNewUser.newLastName.value = "";
-    //             window.formNewUser.newAge.value = "";
-    //             window.formNewUser.newEmail.value = "";
-    //             window.formNewUser.newPassword.value = "";
-    //             window.formNewUser.newRoles.value = "";
-    //
-    //             showAllUsers();
-    //             $('#successful').modal();
-    //         });
-    // }
+    function createUser() {
+        fetch('http://localhost:8080/newuser', {
+            method: 'POST',
+            body: JSON.stringify({
+                firstname: window.formNewUser.firstName.value,
+                lastName: window.formNewUser.lastName.value,
+                age: window.formNewUser.age.value,
+                email: window.formNewUser.email.value,
+                password: window.formNewUser.password.value,
+                roles: window.formNewUser.roles.value
+            }),
+            headers: {"Content-type": "application/json; charset=UTF-8"}
+        })
+            .then(response => {
+                window.formNewUser.firstName.value = "";
+                window.formNewUser.lastName.value = "";
+                window.formNewUser.age.value = "";
+                window.formNewUser.email.value = "";
+                window.formNewUser.password.value = "";
+                window.formNewUser.roles.value = "";
 
-
-        $.getJSON("http://localhost:8080/all",
-            function (data) {
-
-                let userTable = '';
-                let arr = [];
-                let editBtn =
-                    '<a href="/findone/?id=userID" class="btn btn-info btn-sm eBtn">Edit</a>';
-                let deleteBtn =
-                    '<a href="/findone/?id=userID" class="btn btn-danger btn-sm delBtn">Delete</a>';
-
-                $.each(data, function (key, user) {
-
-                    $.each(user.roles, function (i, role) {
-                        arr = role.name;
-                    });
-
-                    userTable += '<tr>';
-                    userTable += '<td id="userID">' + user.id + '</td>';
-                    userTable += '<td id="userFirstName">' + user.firstName + '</td>';
-                    userTable += '<td id="userLastName">' + user.lastName + '</td>';
-                    userTable += '<td id="userEmail">' + user.email + '</td>';
-                    userTable += '<td id="userAge">' + user.age + '</td>';
-                    userTable += '<td id="userRoles">' + arr + '</td>';
-                    userTable += '<td id="userEditBtn">' + editBtn.replace('userID', user.id) + '</td>';
-                    userTable += '<td id="userDeleteBtn">' + deleteBtn.replace('userID', user.id) + '</td>';
-                    userTable += '</tr>';
-                });
-                $('#userstable').append(userTable);
-
-                editModal();
-                deleteModal();
-
+               // showAll();
+                //$('#successful').modal();
             });
+    }
+
+
+    $.getJSON("http://localhost:8080/all",
+        function (data) {
+
+            let userTable = '';
+            let arr = [];
+            let editBtn =
+                '<a href="/findone/?id=userID" class="btn btn-info btn-sm eBtn">Edit</a>';
+            let deleteBtn =
+                '<a href="/findone/?id=userID" class="btn btn-danger btn-sm delBtn">Delete</a>';
+
+            $.each(data, function (key, user) {
+
+                $.each(user.roles, function (i, role) {
+                    arr = role.name;
+                });
+
+                userTable += '<tr>';
+                userTable += '<td id="userID">' + user.id + '</td>';
+                userTable += '<td id="userFirstName">' + user.firstName + '</td>';
+                userTable += '<td id="userLastName">' + user.lastName + '</td>';
+                userTable += '<td id="userEmail">' + user.email + '</td>';
+                userTable += '<td id="userAge">' + user.age + '</td>';
+                userTable += '<td id="userRoles">' + arr + '</td>';
+                userTable += '<td id="userEditBtn">' + editBtn.replace('userID', user.id) + '</td>';
+                userTable += '<td id="userDeleteBtn">' + deleteBtn.replace('userID', user.id) + '</td>';
+                userTable += '</tr>';
+            });
+            $('#userstable').append(userTable);
+
+            editModal();
+            deleteModal();
+
+        });
+
 
 });
