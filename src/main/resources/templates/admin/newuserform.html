@@ -5,7 +5,7 @@
         </div>
         <div class="table-responsive">
 <!--            <form method="post" th:action="@{/newuser}">-->
-            <form id="formNewUser" name="formNewUser" th:action="@{/api/newuser}">
+            <form id="formNewUser" name="formNewUser">
                 <div th:if="${registrationError}">
                     <span class="ui-state-error" th:text="${registrationError}"></span>
                 </div>

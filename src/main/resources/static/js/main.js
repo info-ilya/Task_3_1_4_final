@@ -68,7 +68,7 @@ $(document).ready(function () {
     }
 
     function createUser() {
-        fetch('http://localhost:8080/api/newuser', {
+        fetch('http://localhost:8080/api/users', {
             method: 'POST',
             body: JSON.stringify({
                 firstname: window.formNewUser.firstName.value,
@@ -88,10 +88,22 @@ $(document).ready(function () {
                 window.formNewUser.password.value = "";
                 window.formNewUser.roles.value = "";
 
-               // showAll();
-                //$('#successful').modal();
+               //showAll();
+                //$('#myModalNew').modal();
             });
     }
+
+    $.ajax(
+        {
+            type:'PUT',
+            contentType: 'application/json',
+            url: 'http://localhost:8080/api/users',
+            dataType: "json",
+            success: function (data)
+            {
+                editModal(data);
+            },
+        });
 
 
     $.getJSON("http://localhost:8080/api/users",
@@ -100,9 +112,9 @@ $(document).ready(function () {
             let userTable = '';
             let arr = [];
             let editBtn =
-                '<a href="/api/users/user_id" class="btn btn-info btn-sm eBtn">Edit</a>';
+                '<a href="/api/users/userid" class="btn btn-info btn-sm eBtn">Edit</a>';
             let deleteBtn =
-                '<a href="/api/users/user_id" class="btn btn-danger btn-sm delBtn">Delete</a>';
+                '<a href="/api/users/userid" class="btn btn-danger btn-sm delBtn">Delete</a>';
 
             $.each(data, function (key, user) {
 
@@ -117,8 +129,8 @@ $(document).ready(function () {
                 userTable += '<td id="userEmail">' + user.email + '</td>';
                 userTable += '<td id="userAge">' + user.age + '</td>';
                 userTable += '<td id="userRoles">' + arr + '</td>';
-                userTable += '<td id="userEditBtn">' + editBtn.replace('user_id', user.id) + '</td>';
-                userTable += '<td id="userDeleteBtn">' + deleteBtn.replace('user_id', user.id) + '</td>';
+                userTable += '<td id="userEditBtn">' + editBtn.replace('userid', user.id) + '</td>';
+                userTable += '<td id="userDeleteBtn">' + deleteBtn.replace('userid', user.id) + '</td>';
                 userTable += '</tr>';
             });
             $('#userstable').append(userTable);

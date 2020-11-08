@@ -54,12 +54,12 @@ public class AdminController {
 //        return "redirect:/admin";
 //    }
 
-    @GetMapping("/{name}")
-    public String showSingleUserInfo(@PathVariable("name") String name, Model model) {
-        model.addAttribute("usersList", userService.findAllUsers());
-        model.addAttribute("roles", roleRepository.findAll());
-        model.addAttribute("user", userService.findByEmail(name));
-        model.addAttribute("currentuser", name);
-        return "admin/userinfotable";
-    }
+//    @GetMapping("/{name}")
+//    public String showSingleUserInfo(@PathVariable("name") String name, Model model) {
+//        model.addAttribute("usersList", userService.findAllUsers());
+//        model.addAttribute("roles", roleRepository.findAll());
+//        model.addAttribute("user", userService.findByEmail(name));
+//        model.addAttribute("currentuser", name);
+//        return "admin/userinfotable";
+//    }
 }

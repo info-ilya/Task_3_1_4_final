@@ -1,6 +1,7 @@
 package ru.spring.model;
 
 import lombok.*;
+import org.springframework.security.access.annotation.Secured;
 
 import javax.persistence.*;
 import java.util.HashSet;

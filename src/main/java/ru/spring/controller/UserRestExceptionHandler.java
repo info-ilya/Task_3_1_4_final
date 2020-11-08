@@ -2,9 +2,11 @@ package ru.spring.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.spring.error.UserErrorResponse;
+import ru.spring.error.UserNotFoundException;
 
 @ControllerAdvice
 public class UserRestExceptionHandler {
@@ -18,5 +20,7 @@ public class UserRestExceptionHandler {
 
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
+
+
 
 }
