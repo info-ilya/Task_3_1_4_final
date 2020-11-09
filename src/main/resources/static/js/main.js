@@ -10,6 +10,7 @@ $(document).ready(function () {
     mainTable();
     newUser();
 
+
     function editModal() {
         $('.table .eBtn').on('click', function (event) {
             event.preventDefault();
@@ -96,66 +97,30 @@ $(document).ready(function () {
     // }
 
     function newUser() {
-        // const headers = new Headers({
-        //     'Content-Type': 'application/json',
-        //     'Accept': 'application/json'
-        // });
-        //
-        // const request = new Request('http://localhost:8080/api/users', {
-        //     method: 'POST',
-        //     headers: headers,
-        //     redirect: 'follow',
-        //     mode: 'cors',
-        //     body: JSON.stringify(user)
-        // });
-
         const myForm = document.getElementById("formNewUser");
         myForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            const formData = new FormData(this);
-            const searchParams = new URLSearchParams();
-
-            for(const pair of formData){
-                searchParams.append(pair[0], pair[1]);
-            }
 
             fetch('http://localhost:8080/api/users', {
                 method: 'POST',
-                body: searchParams
+                body: JSON.stringify({
+                    //_csrf: window.formNewUser._csrf.value,
+                    firstName: window.formNewUser.firstName.value,
+                    lastName: window.formNewUser.lastName.value,
+                    age: window.formNewUser.age.value,
+                    email: window.formNewUser.email.value,
+                    password: window.formNewUser.password.value,
+                    roles: window.formNewUser.roles.nodeValue
+                }),
 
-            }).then(function (response) {
-                return response.text();
-            }).then(function (text) {
-                console.log(test);
-            }).catch(function (error) {
-                console.error(error);
-            })
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
 
-        });
-
+            }).then(response => response.json())
+        })
     }
-
-    // function deleteUser(){
-    //     const user = {
-    //         id: window.deleteUserForm.id1.value
-    //     };
-    //     const options = {
-    //         method: 'DELETE',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }
-    //
-    //     fetch('http://localhost:8080/api/users' + "/" + user, options)
-    //         .then(res => {
-    //             if (res.ok) {
-    //                 return Promise.resolve('User deleted.');
-    //             } else {
-    //                 return Promise.reject('An error occurred.');
-    //             }
-    //         })
-    //         .then(res => console.log(res));
-    // }
 
     function mainTable() {
         $.getJSON("http://localhost:8080/api/users",

@@ -1,15 +1,21 @@
 package ru.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.spring.model.Role;
 import ru.spring.model.User;
+import ru.spring.repository.RoleRepository;
 import ru.spring.service.UserService;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -17,6 +23,9 @@ public class UserRestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
@@ -31,12 +40,11 @@ public class UserRestController {
         return userService.findById(userId);
     }
 
-    @PostMapping(value = "/users", produces = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    @ResponseBody
-    public User addNewUser( User user) {
-        user.setId(0L);
+    @PostMapping(value = "/users")
+    public User addNewUser(@RequestBody User user) {
         return userService.save(user);
     }
+
 
 //    @RequestMapping(value = "/users",
 //            method = RequestMethod.POST,
@@ -44,7 +52,7 @@ public class UserRestController {
 //    )
 //    public @ResponseBody ResponseEntity<User> createEmployee( User user){
 //        userService.save(user);
-//        return new ResponseEntity<User>(user, new HttpHeaders(), HttpStatus.OK);
+//        return new ResponseEntity<>(user, new HttpHeaders(), HttpStatus.OK);
 //    }
 
     //    @DeleteMapping("/users/{userId}")
