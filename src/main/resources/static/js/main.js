@@ -119,6 +119,7 @@ $(document).ready(function () {
                 }
 
             }).then(response => response.json())
+                .then(mainTable)
         })
     }
 
