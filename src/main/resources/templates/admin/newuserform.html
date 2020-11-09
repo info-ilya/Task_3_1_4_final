@@ -6,9 +6,6 @@
         <div class="table-responsive">
 <!--            <form method="post" th:action="@{/newuser}">-->
             <form id="formNewUser" name="formNewUser">
-                <div th:if="${registrationError}">
-                    <span class="ui-state-error" th:text="${registrationError}"></span>
-                </div>
                 <div class="form-group text-center w-25 mx-auto">
                     <label for="firstName" class="col-form-label font-weight-bold">First Name</label>
                     <input name="firstName" type="text" class="form-control list-group-item-warning" id="firstName" value=""/>
@@ -37,7 +34,7 @@
                     </select>
                 </div>
                 <div class="form-group text-center w-25 mx-auto font-weight-bold">
-                    <input type="submit" class="btn btn-success bt-lg" value="Add new user"/>
+                    <button type="submit" class="btn btn-success bt-lg submitBtn" value="Add new user">Add new user</button>
                 </div>
             </form>
         </div>

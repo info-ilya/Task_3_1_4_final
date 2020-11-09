@@ -7,6 +7,9 @@ $(document).ready(function () {
         $('#myList a:first-child').tab('show');
     });
 
+    mainTable();
+    newUser();
+
     function editModal() {
         $('.table .eBtn').on('click', function (event) {
             event.preventDefault();
@@ -67,78 +70,130 @@ $(document).ready(function () {
         });
     }
 
-    function createUser() {
-        fetch('http://localhost:8080/api/users', {
-            method: 'POST',
-            body: JSON.stringify({
-                firstname: window.formNewUser.firstName.value,
-                lastName: window.formNewUser.lastName.value,
-                age: window.formNewUser.age.value,
-                email: window.formNewUser.email.value,
-                password: window.formNewUser.password.value,
-                roles: window.formNewUser.roles.value
-            }),
-            headers: {"Content-type": "application/json; charset=UTF-8"}
-        })
-            .then(response => {
-                window.formNewUser.firstName.value = "";
-                window.formNewUser.lastName.value = "";
-                window.formNewUser.age.value = "";
-                window.formNewUser.email.value = "";
-                window.formNewUser.password.value = "";
-                window.formNewUser.roles.value = "";
+    // function createUser() {
+    //     fetch('http://localhost:8080/api/users', {
+    //         method: 'POST',
+    //         body: JSON.stringify({
+    //             firstname: window.formNewUser.firstName.value,
+    //             lastName: window.formNewUser.lastName.value,
+    //             age: window.formNewUser.age.value,
+    //             email: window.formNewUser.email.value,
+    //             password: window.formNewUser.password.value,
+    //             roles: window.formNewUser.roles.value
+    //         }),
+    //         headers: {"Content-type": "application/json; charset=UTF-8"}
+    //     })
+    //         .then(response => {
+    //             window.formNewUser.firstName.value = "";
+    //             window.formNewUser.lastName.value = "";
+    //             window.formNewUser.age.value = "";
+    //             window.formNewUser.email.value = "";
+    //             window.formNewUser.password.value = "";
+    //             window.formNewUser.roles.value = "";
+    //
+    //             $('.myModalNew .submitBtn').submit();
+    //         });
+    // }
 
-               //showAll();
-                //$('#myModalNew').modal();
-            });
+    function newUser() {
+        // const headers = new Headers({
+        //     'Content-Type': 'application/json',
+        //     'Accept': 'application/json'
+        // });
+        //
+        // const request = new Request('http://localhost:8080/api/users', {
+        //     method: 'POST',
+        //     headers: headers,
+        //     redirect: 'follow',
+        //     mode: 'cors',
+        //     body: JSON.stringify(user)
+        // });
+
+        const myForm = document.getElementById("formNewUser");
+        myForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const searchParams = new URLSearchParams();
+
+            for(const pair of formData){
+                searchParams.append(pair[0], pair[1]);
+            }
+
+            fetch('http://localhost:8080/api/users', {
+                method: 'POST',
+                body: searchParams
+
+            }).then(function (response) {
+                return response.text();
+            }).then(function (text) {
+                console.log(test);
+            }).catch(function (error) {
+                console.error(error);
+            })
+
+        });
+
     }
 
-    $.ajax(
-        {
-            type:'PUT',
-            contentType: 'application/json',
-            url: 'http://localhost:8080/api/users',
-            dataType: "json",
-            success: function (data)
-            {
-                editModal(data);
-            },
-        });
+    // function deleteUser(){
+    //     const user = {
+    //         id: window.deleteUserForm.id1.value
+    //     };
+    //     const options = {
+    //         method: 'DELETE',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     }
+    //
+    //     fetch('http://localhost:8080/api/users' + "/" + user, options)
+    //         .then(res => {
+    //             if (res.ok) {
+    //                 return Promise.resolve('User deleted.');
+    //             } else {
+    //                 return Promise.reject('An error occurred.');
+    //             }
+    //         })
+    //         .then(res => console.log(res));
+    // }
 
+    function mainTable() {
+        $.getJSON("http://localhost:8080/api/users",
+            function (data) {
 
-    $.getJSON("http://localhost:8080/api/users",
-        function (data) {
+                let userTable = '';
+                let arr = [];
+                let editBtn =
+                    '<a href="/api/users/userid" class="btn btn-info btn-sm eBtn">Edit</a>';
+                let deleteBtn =
+                    '<a href="/api/users/userid" class="btn btn-danger btn-sm delBtn">Delete</a>';
 
-            let userTable = '';
-            let arr = [];
-            let editBtn =
-                '<a href="/api/users/userid" class="btn btn-info btn-sm eBtn">Edit</a>';
-            let deleteBtn =
-                '<a href="/api/users/userid" class="btn btn-danger btn-sm delBtn">Delete</a>';
+                $.each(data, function (key, user) {
 
-            $.each(data, function (key, user) {
+                    $.each(user.roles, function (i, role) {
+                        arr = role.name;
+                    });
 
-                $.each(user.roles, function (i, role) {
-                    arr = role.name;
+                    userTable += '<tr>';
+                    userTable += '<td id="userID">' + user.id + '</td>';
+                    userTable += '<td id="userFirstName">' + user.firstName + '</td>';
+                    userTable += '<td id="userLastName">' + user.lastName + '</td>';
+                    userTable += '<td id="userEmail">' + user.email + '</td>';
+                    userTable += '<td id="userAge">' + user.age + '</td>';
+                    userTable += '<td id="userRoles">' + arr + '</td>';
+                    userTable += '<td id="userEditBtn">' + editBtn.replace('userid', user.id) + '</td>';
+                    userTable += '<td id="userDeleteBtn">' + deleteBtn.replace('userid', user.id) + '</td>';
+                    userTable += '</tr>';
+
                 });
+                $('#userstable').append(userTable);
 
-                userTable += '<tr>';
-                userTable += '<td id="userID">' + user.id + '</td>';
-                userTable += '<td id="userFirstName">' + user.firstName + '</td>';
-                userTable += '<td id="userLastName">' + user.lastName + '</td>';
-                userTable += '<td id="userEmail">' + user.email + '</td>';
-                userTable += '<td id="userAge">' + user.age + '</td>';
-                userTable += '<td id="userRoles">' + arr + '</td>';
-                userTable += '<td id="userEditBtn">' + editBtn.replace('userid', user.id) + '</td>';
-                userTable += '<td id="userDeleteBtn">' + deleteBtn.replace('userid', user.id) + '</td>';
-                userTable += '</tr>';
+                editModal();
+                deleteModal();
+
+
             });
-            $('#userstable').append(userTable);
-
-            editModal();
-            deleteModal();
-
-        });
+    }
 
 
 });
