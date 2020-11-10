@@ -59,9 +59,8 @@ public class UserRestController {
     @RequestMapping(value = "/users/{id1}",
             produces = "application/json",
             method = RequestMethod.DELETE)
-    public String deleteUser(@PathVariable("id1") Long id1) {
+    public void deleteUser(@PathVariable("id1") Long id1) {
         userService.deleteUserById(id1);
-        return "Users delete";
     }
 
     //    @PutMapping("/users")

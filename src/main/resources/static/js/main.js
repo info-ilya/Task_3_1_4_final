@@ -110,7 +110,7 @@ $(document).ready(function () {
                     age: window.formNewUser.age.value,
                     email: window.formNewUser.email.value,
                     password: window.formNewUser.password.value,
-                    roles: window.formNewUser.roles.nodeValue
+                    roles: $("#formNewUser #roles").val()
                 }),
 
                 headers: {

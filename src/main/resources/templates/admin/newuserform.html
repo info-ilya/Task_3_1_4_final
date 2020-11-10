@@ -28,9 +28,9 @@
                 </div>
                 <div class="form-group text-center w-25 mx-auto font-weight-bold">
                     <label for="roles" class="col-form-label">Role</label>
-                    <select size="2" th:value="*{roles}" name="roles" id="roles"
-                            class="custom-select" multiple>
-                        <option th:each="item : ${roles}" th:text="${item.name}"></option>
+                    <select size="2"
+                            class="custom-select" name="roles" id="roles"  multiple>
+                        <option th:each="item : ${roles}" th:value="${item.name}"  th:text="${item.name}"></option>
                     </select>
                 </div>
                 <div class="form-group text-center w-25 mx-auto font-weight-bold">
