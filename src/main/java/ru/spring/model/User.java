@@ -1,8 +1,6 @@
 package ru.spring.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.springframework.security.access.annotation.Secured;
 
 import javax.persistence.*;
 import java.util.HashSet;

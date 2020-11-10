@@ -45,7 +45,7 @@
                 <br>
                 <h2>Admin panel</h2>
                 <ul class="nav nav-tabs" id="myTabs">
-                    <li class="nav-item"><a href="#home" role="tab" data-toggle="list" class="nav-link active">Users
+                    <li class="nav-item"><a href="#home" role="tab" data-toggle="list" class="nav-link active homeTab">Users
                         table</a></li>
                     <li class="nav-item"><a href="#newuser" role="tab" data-toggle="list" class="nav-link nBtn">New
                         User</a>
@@ -69,26 +69,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-<!--                                <tr th:each="user : ${usersList}">-->
-<!--                                    <td id="userID"></td>-->
-<!--                                    <td id="userFirstName"></td>-->
-<!--                                    <td id="userLastName"></td>-->
-<!--                                    <td id="userEmail"></td>-->
-<!--                                    <td id="userAge"></td>-->
-<!--                                    <td id="userRoles"></td>-->
-<!--                                    <td id="userEditBtn"><a th:href="@{/findone/(id=${user.id})}"-->
-<!--                                           class="btn btn-info btn-sm eBtn">Edit</a>-->
-
-<!--                                        &lt;!&ndash;    Edit Modal&ndash;&gt;-->
-<!--                                        <div th:include="admin/editmodal"></div>-->
-<!--                                    </td>-->
-<!--                                    <td id="userDeleteBtn"><a th:href="@{/findone/(id=${user.id})}"-->
-<!--                                           class="btn btn-danger btn-sm delBtn">Delete</a>-->
-
-<!--                                        &lt;!&ndash;    Delete modal&ndash;&gt;-->
-<!--                                        <div th:include="/admin/deletemodal"></div>-->
-<!--                                    </td>-->
-<!--                                </tr>-->
                                 <div th:include="admin/editmodal"></div>
                                 <div th:include="admin/deletemodal"></div>
 

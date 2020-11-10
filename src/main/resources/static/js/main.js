@@ -9,7 +9,18 @@ $(document).ready(function () {
 
     mainTable();
     newUser();
+    reloadMainTable()
 
+    function reloadMainTable() {
+        $("#myTabs .homeTab").click(function () {
+            $("#userstable")
+        })
+    }
+
+    function deleteRow(row) {
+        var d = row.parentNode.parentNode.rowIndex;
+        document.getElementById('#userstable').deleteRow(d);
+    }
 
     function editModal() {
         $('.table .eBtn').on('click', function (event) {
@@ -46,16 +57,41 @@ $(document).ready(function () {
                     }
 
                 })
-                $('#exampleModal').modal();
+                $('#editModal').modal();
+
+                const myForm = document.getElementById("editUserForm");
+                myForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    return fetch('http://localhost:8080/api/users/', {
+                        method: 'PUT',
+                        body: JSON.stringify({
+                            id: window.editUserForm.id.value,
+                            firstName: window.editUserForm.firstName.value,
+                            lastName: window.editUserForm.lastName.value,
+                            age: window.editUserForm.age.value,
+                            email: window.editUserForm.email.value,
+                            password: window.editUserForm.password.value,
+                            roles: $("#editUserForm #roles").val()
+                        }),
+
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        }
+                    }).then(response => response.json())
+                        .then($('#editModal').modal('hide'))
+                })
 
             }
         });
     }
 
     function deleteModal() {
-        $('.table .delBtn').on('click', function (event) {
+        $('#userstable .delBtn').on('click', function (event) {
             event.preventDefault();
             let href = $(this).attr('href');
+            let userid;
             $.get(href, function (user, status) {
                 $('.deleteModalNew #id1').val(user.id);
                 $('.deleteModalNew #firstName1').val(user.firstName);
@@ -66,8 +102,24 @@ $(document).ready(function () {
                 $.each(user.roles, function (i, role) {
                     $('.deleteModalNew #roles1').append('<option value="' + role.name + '">' + role.name + '</option>');
                 });
+
+                userid = user.id;
             })
+
+            let closestTr = $(this).closest("tr");
+
             $('#deleteModal').modal();
+
+            const myForm = document.getElementById("deleteUserForm");
+            myForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                return fetch('http://localhost:8080/api/users/' + userid, {
+                    method: 'DELETE',
+                }).then(response => response.json())
+                    .then($('#deleteModal').modal('hide'))
+                    .then(closestTr.remove())
+            })
         });
     }
 
@@ -119,9 +171,9 @@ $(document).ready(function () {
                 }
 
             }).then(response => response.json())
-                .then(mainTable)
         })
     }
+
 
     function mainTable() {
         $.getJSON("http://localhost:8080/api/users",
@@ -140,7 +192,7 @@ $(document).ready(function () {
                         arr = role.name;
                     });
 
-                    userTable += '<tr>';
+                    userTable += '<tr id="row">';
                     userTable += '<td id="userID">' + user.id + '</td>';
                     userTable += '<td id="userFirstName">' + user.firstName + '</td>';
                     userTable += '<td id="userLastName">' + user.lastName + '</td>';

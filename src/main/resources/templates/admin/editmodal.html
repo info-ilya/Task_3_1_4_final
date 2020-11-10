@@ -1,7 +1,6 @@
-<div class="modal fade myModal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+<div class="modal fade myModal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
      aria-hidden="true">
-<!--    <form method="post" th:action="@{/edituser}">-->
-    <form id="editUserForm" name="editUserForm" th:action="@{/api/users}">
+    <form id="editUserForm" name="editUserForm">
         <input type="hidden" name="_method" value="put">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -44,7 +43,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Edit"/>
+                    <button type="submit" class="btn btn-primary" value="Edit">Edit</button>
                 </div>
             </div>
         </div>
