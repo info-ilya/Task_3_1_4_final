@@ -9,21 +9,9 @@ $(document).ready(function () {
 
     mainTable();
     newUser();
-    reloadMainTable()
-
-    function reloadMainTable() {
-        $("#myTabs .homeTab").click(function () {
-            $("#userstable")
-        })
-    }
-
-    function deleteRow(row) {
-        var d = row.parentNode.parentNode.rowIndex;
-        document.getElementById('#userstable').deleteRow(d);
-    }
 
     function editModal() {
-        $('.table .eBtn').on('click', function (event) {
+        $('#userstable .eBtn').on('click', function (event) {
             event.preventDefault();
             let href = $(this).attr('href');
             let text = $(this).text();
@@ -57,6 +45,7 @@ $(document).ready(function () {
                     }
 
                 })
+
                 $('#editModal').modal();
 
                 const myForm = document.getElementById("editUserForm");
@@ -72,9 +61,8 @@ $(document).ready(function () {
                             age: window.editUserForm.age.value,
                             email: window.editUserForm.email.value,
                             password: window.editUserForm.password.value,
-                            roles: $("#editUserForm #roles").val()
+                            roles: $(".myModal #roles").val()
                         }),
-
                         headers: {
                             'Content-Type': 'application/json',
                             'Accept': 'application/json'
@@ -164,13 +152,13 @@ $(document).ready(function () {
                     password: window.formNewUser.password.value,
                     roles: $("#formNewUser #roles").val()
                 }),
-
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 }
-
             }).then(response => response.json())
+                .then($('#userstable').empty())
+                .then(mainTable)
         })
     }
 
