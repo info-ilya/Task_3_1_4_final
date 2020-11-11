@@ -173,23 +173,26 @@ $(document).ready(function () {
                             .replace('userid', user.id))
                             .text(user.firstName)
                             .appendTo($(".allUsersSidebar li"));
-
                     })
+
+                    $('.allUsersSidebar .userBtn').on('click', function (event) {
+                        event.preventDefault()
+                        let href = $(this).attr('href');
+                        $.get(href, function (user, status) {
+                            $('#userstable #userID').val(user.id);
+                            $('#userstable #userFirstName').val(user.firstName);
+                            $('#userstable #userLastName').val(user.lastName);
+                            $('#userstable #userEmail').val(user.email);
+                            $('#userstable #userAge').val(user.age);
+                            $('#userstable #userRoles').empty();
+                            $.each(user.roles, function (i, role) {
+                                $('#userstable #roles').append('<td>' + role.name + '</td>');
+                            });
+                        })
+                    })
+
                 })
-            $('.allUsersSidebar .userBtn').on('click', function (event) {
-                let href = $(this).attr('href');
-                $.get(href, function (user, status) {
-                    $('#userstable #userID').val(user.id);
-                    $('#userstable #userFirstName').val(user.firstName);
-                    $('#userstable #userLastName').val(user.lastName);
-                    $('#userstable #userEmail').val(user.email);
-                    $('#userstable #userAge').val(user.age);
-                    $('#userstable #userRoles').empty();
-                    $.each(user.roles, function (i, role) {
-                        $('#userstable #roles').append('<td>' + role.name + '</td>');
-                    });
-                })
-            })
+
         }
 
 
