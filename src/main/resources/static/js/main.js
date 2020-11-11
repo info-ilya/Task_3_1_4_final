@@ -7,11 +7,6 @@ $(document).ready(function () {
             $('#myList a:first-child').tab('show');
         });
 
-        // $('.allUsersSidebar .allUsers').on('click', function (e) {
-        //     e.preventDefault();
-        //     $('#userstablebody').empty().append(mainTable())
-        // });
-
         mainTable();
         newUser();
         allUsersSidebar();
@@ -52,7 +47,6 @@ $(document).ready(function () {
                         }
 
                     })
-
                     $('#editModal').modal();
 
                     const myForm = document.getElementById("editUserForm");
@@ -78,7 +72,9 @@ $(document).ready(function () {
                             $('#userstablebody').empty().append(mainTable())
                             $('#editModal').modal('hide')
                         })
+
                     })
+
                 }
             });
         }
@@ -231,7 +227,7 @@ $(document).ready(function () {
                         userTable += '<td id="userDeleteBtn">' + deleteBtn.replace('userid', user.id) + '</td>';
                         userTable += '</tr>';
                     });
-                    $('#userstable').append(userTable);
+                    $('#userstable').empty().append(userTable);
 
                     editModal();
                     deleteModal();
