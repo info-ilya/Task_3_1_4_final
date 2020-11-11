@@ -31,12 +31,12 @@
             <nav class="nav flex-column col-md-2 d-md-block sidebar pt-3 bg-white border-right">
                 <ul class="list-group border-right allUsersSidebar">
                     <li><a class="list-group-item list-group-item-action active border-0" href="#">All users</a></li>
-<!--                    <li th:each="user : ${usersList}">-->
-<!--                        <a class="list-group-item list-group-item-action text-capitalize border-0 userBtn"-->
-<!--                           th:href="@{/{name}(name=${user.email})}"-->
-<!--                           th:utext="${user.firstName}">-->
-<!--                        </a>-->
-<!--                    </li>-->
+                                        <li th:each="user : ${usersList}">
+                                            <a class="list-group-item list-group-item-action text-capitalize border-0 userBtn"
+                                               th:href="@{/api/users/{userId}(userId=${user.id})}"
+                                               th:utext="${user.firstName}">
+                                            </a>
+                                        </li>
                 </ul>
             </nav>
             <div class="sidebar-sticky"></div>
@@ -71,9 +71,13 @@
                                 <tbody id="userstablebody">
                                 <div th:include="admin/editmodal"></div>
                                 <div th:include="admin/deletemodal"></div>
-
                                 </tbody>
+                                <tbody id="userInfo">
+                                <tr id="userInfoTr"></tr>
+                                </tbody>
+
                             </table>
+                            <div class="testUser"></div>
                         </div>
                     </div>
                     <div class="tab-pane" id="newuser" role="tabpanel">

@@ -166,54 +166,54 @@ $(document).ready(function () {
         }
 
         function allUsersSidebar() {
-            $.getJSON("http://localhost:8080/api/users",
-                function (data) {
-                    $.each(data, function (key, user) {
-                        $("<a href='/api/users/userid' class='list-group-item list-group-item-action text-capitalize border-0 userBtn'></a>"
-                            .replace('userid', user.id))
-                            .text(user.firstName)
-                            .appendTo($(".allUsersSidebar li"));
+            // $.getJSON("http://localhost:8080/api/users",
+            //     function (data) {
+            //         $.each(data, function (key, user) {
+            //             $("<a href='/api/users/userid' class='list-group-item list-group-item-action text-capitalize border-0 userBtn'></a>"
+            //                 .replace('userid', user.id))
+            //                 .text(user.firstName)
+            //                 .appendTo($(".allUsersSidebar li"));
+            //         })
+            //     })
+            $('.allUsersSidebar .userBtn').on('click', function (event) {
+                event.preventDefault()
+                let href = $(this).attr('href');
+                let arr = [];
 
+                $.get(href, function (user, status) {
+                    $.each(user.roles, function (i, role) {
+                        arr += role.name + " ";
+                    });
 
-                    $('.allUsersSidebar .userBtn').on('click', function (event) {
-                        event.preventDefault()
-                        let href = $(this).attr('href');
-
-
-                            $('#userstable #userID').val(user.id);
-                            $('#userstable #userFirstName').val(user.firstName);
-                            $('#userstable #userLastName').val(user.lastName);
-                            $('#userstable #userEmail').val(user.email);
-                            $('#userstable #userAge').val(user.age);
-                            $('#userstable #userRoles').empty();
-                            $.each(user.roles, function (i, role) {
-                                $('#userstable #roles').append('<td>' + role.name + '</td>');
-                            });
-                    })
-                    })
-
+                    $('#userInfo #userInfoTr')
+                        .empty()
+                        .append('<td>' + user.id + '</td>')
+                        .append('<td>' + user.firstName + '</td>')
+                        .append('<td>' + user.lastName + '</td>')
+                        .append('<td>' + user.email + '</td>')
+                        .append('<td>' + user.age + '</td>')
+                        .append('<td>' + arr + '</td>');
                 })
+                $('#userstablebody').empty();
 
+            })
         }
 
 
         function mainTable() {
+            let userTable = '';
+            let arr = [];
+            let editBtn =
+                '<a href="/api/users/userid" class="btn btn-info btn-sm eBtn">Edit</a>';
+            let deleteBtn =
+                '<a href="/api/users/userid" class="btn btn-danger btn-sm delBtn">Delete</a>';
+
             $.getJSON("http://localhost:8080/api/users",
                 function (data) {
-
-                    let userTable = '';
-                    let arr = [];
-                    let editBtn =
-                        '<a href="/api/users/userid" class="btn btn-info btn-sm eBtn">Edit</a>';
-                    let deleteBtn =
-                        '<a href="/api/users/userid" class="btn btn-danger btn-sm delBtn">Delete</a>';
-
                     $.each(data, function (key, user) {
-
                         $.each(user.roles, function (i, role) {
-                            arr = role.name;
+                            arr = role.name + " ";
                         });
-
                         userTable += '<tr id="rowID">';
                         userTable += '<td id="userID">' + user.id + '</td>';
                         userTable += '<td id="userFirstName">' + user.firstName + '</td>';
@@ -224,7 +224,6 @@ $(document).ready(function () {
                         userTable += '<td id="userEditBtn">' + editBtn.replace('userid', user.id) + '</td>';
                         userTable += '<td id="userDeleteBtn">' + deleteBtn.replace('userid', user.id) + '</td>';
                         userTable += '</tr>';
-
                     });
                     $('#userstable').append(userTable);
 
