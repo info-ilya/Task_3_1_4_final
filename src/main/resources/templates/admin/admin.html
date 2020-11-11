@@ -29,7 +29,7 @@
     <div class="container-fluid">
         <div class="row">
             <nav class="nav flex-column col-md-2 d-md-block sidebar pt-3 bg-white border-right">
-                <ul class="list-group border-right">
+                <ul class="list-group border-right allUsersSidebar">
                     <li><a class="list-group-item list-group-item-action active border-0" href="#">All users</a></li>
 <!--                    <li th:each="user : ${usersList}">-->
 <!--                        <a class="list-group-item list-group-item-action text-capitalize border-0 userBtn"-->
@@ -68,7 +68,7 @@
                                     <th>Delete</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="userstablebody">
                                 <div th:include="admin/editmodal"></div>
                                 <div th:include="admin/deletemodal"></div>
 

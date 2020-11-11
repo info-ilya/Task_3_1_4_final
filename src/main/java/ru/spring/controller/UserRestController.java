@@ -3,7 +3,6 @@ package ru.spring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.spring.model.User;
-import ru.spring.repository.RoleRepository;
 import ru.spring.service.UserService;
 
 import java.util.List;
@@ -14,9 +13,6 @@ public class UserRestController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private RoleRepository roleRepository;
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
