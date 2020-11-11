@@ -7,6 +7,11 @@ $(document).ready(function () {
             $('#myList a:first-child').tab('show');
         });
 
+    // $('.allUsersSidebar .allUsers').on('click', function (e) {
+    //     e.preventDefault();
+    //     $('#userstablebody').empty().append(mainTable())
+    // });
+
         mainTable();
         newUser();
         allUsersSidebar();
@@ -184,8 +189,10 @@ $(document).ready(function () {
                     $.each(user.roles, function (i, role) {
                         arr += role.name + " ";
                     });
-
-                    $('#userInfo #userInfoTr')
+                    $('#userstablebody #rowID').empty();
+                    $('#userstable #userstableEdit').empty();
+                    $('#userstable #userstableDelete').empty();
+                    $('#userstablebody #userInfoTr')
                         .empty()
                         .append('<td>' + user.id + '</td>')
                         .append('<td>' + user.firstName + '</td>')
@@ -194,8 +201,6 @@ $(document).ready(function () {
                         .append('<td>' + user.age + '</td>')
                         .append('<td>' + arr + '</td>');
                 })
-                $('#userstablebody').empty();
-
             })
         }
 

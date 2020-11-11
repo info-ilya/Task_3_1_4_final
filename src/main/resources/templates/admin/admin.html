@@ -30,7 +30,7 @@
         <div class="row">
             <nav class="nav flex-column col-md-2 d-md-block sidebar pt-3 bg-white border-right">
                 <ul class="list-group border-right allUsersSidebar">
-                    <li><a class="list-group-item list-group-item-action active border-0" href="#">All users</a></li>
+                    <li><a class="list-group-item list-group-item-action active border-0 allUsers" href="#">All users</a></li>
                                         <li th:each="user : ${usersList}">
                                             <a class="list-group-item list-group-item-action text-capitalize border-0 userBtn"
                                                th:href="@{/api/users/{userId}(userId=${user.id})}"
@@ -64,17 +64,19 @@
                                     <th>Email</th>
                                     <th>Age</th>
                                     <th>Role</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th id="userstableEdit">Edit</th>
+                                    <th id="userstableDelete">Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody id="userstablebody">
+                                <tr id="userInfoTr">
                                 <div th:include="admin/editmodal"></div>
                                 <div th:include="admin/deletemodal"></div>
+                                </tr>
                                 </tbody>
-                                <tbody id="userInfo">
-                                <tr id="userInfoTr"></tr>
-                                </tbody>
+<!--                                <tbody id="userInfo">-->
+<!--                                <tr id="userInfoTr"></tr>-->
+<!--                                </tbody>-->
 
                             </table>
                             <div class="testUser"></div>
