@@ -227,7 +227,8 @@ $(document).ready(function () {
                         userTable += '<td id="userDeleteBtn">' + deleteBtn.replace('userid', user.id) + '</td>';
                         userTable += '</tr>';
                     });
-                    $('#userstable').empty().append(userTable);
+                    $('#userstablebody #rowID').empty();
+                    $('#userstable').append(userTable);
 
                     editModal();
                     deleteModal();
