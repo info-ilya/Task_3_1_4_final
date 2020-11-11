@@ -7,10 +7,10 @@ $(document).ready(function () {
             $('#myList a:first-child').tab('show');
         });
 
-    // $('.allUsersSidebar .allUsers').on('click', function (e) {
-    //     e.preventDefault();
-    //     $('#userstablebody').empty().append(mainTable())
-    // });
+        // $('.allUsersSidebar .allUsers').on('click', function (e) {
+        //     e.preventDefault();
+        //     $('#userstablebody').empty().append(mainTable())
+        // });
 
         mainTable();
         newUser();
@@ -207,7 +207,6 @@ $(document).ready(function () {
 
         function mainTable() {
             let userTable = '';
-            let arr = [];
             let editBtn =
                 '<a href="/api/users/userid" class="btn btn-info btn-sm eBtn">Edit</a>';
             let deleteBtn =
@@ -216,9 +215,11 @@ $(document).ready(function () {
             $.getJSON("http://localhost:8080/api/users",
                 function (data) {
                     $.each(data, function (key, user) {
+                        let arr = [];
                         $.each(user.roles, function (i, role) {
-                            arr = role.name + " ";
-                        });
+                            arr += role.name + " ";
+                        })
+
                         userTable += '<tr id="rowID">';
                         userTable += '<td id="userID">' + user.id + '</td>';
                         userTable += '<td id="userFirstName">' + user.firstName + '</td>';
