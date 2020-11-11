@@ -11,8 +11,8 @@
     <groupId>ru.spring</groupId>
     <artifactId>boot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Task_3_1_3</name>
-    <description>Task_3_1_3</description>
+    <name>Task_3_1_4</name>
+    <description>Task_3_1_4</description>
     <packaging>jar</packaging>
 
     <properties>
