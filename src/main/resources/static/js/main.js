@@ -173,12 +173,13 @@ $(document).ready(function () {
                             .replace('userid', user.id))
                             .text(user.firstName)
                             .appendTo($(".allUsersSidebar li"));
-                    })
+
 
                     $('.allUsersSidebar .userBtn').on('click', function (event) {
                         event.preventDefault()
                         let href = $(this).attr('href');
-                        $.get(href, function (user, status) {
+
+
                             $('#userstable #userID').val(user.id);
                             $('#userstable #userFirstName').val(user.firstName);
                             $('#userstable #userLastName').val(user.lastName);
@@ -188,7 +189,7 @@ $(document).ready(function () {
                             $.each(user.roles, function (i, role) {
                                 $('#userstable #roles').append('<td>' + role.name + '</td>');
                             });
-                        })
+                    })
                     })
 
                 })
