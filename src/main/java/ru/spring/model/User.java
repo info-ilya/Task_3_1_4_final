@@ -18,42 +18,18 @@ public class User{
     private Long id;
 
     @Column(name = "age")
-    private int age;
+    private Byte age;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
+    @Column(name = "lastname")
     private String lastName;
 
-    @Column(name = "email", unique = true)
-    private String email;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
-
-    public User(int age, String password, String firstName, String lastName, String email) {
+    public User(Byte age, String name, String lastName) {
         this.age = age;
-        this.password = password;
-        this.firstName = firstName;
+        this.name = name;
         this.lastName = lastName;
-        this.email = email;
-    }
-
-    public User(int age, String password, String firstName, String lastName, String email,
-                Set<Role> roles) {
-        this.age = age;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.roles = roles;
     }
 }
 

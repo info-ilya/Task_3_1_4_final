@@ -1,61 +1,87 @@
 package ru.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import ru.spring.model.User;
 import ru.spring.service.UserService;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/api")
 public class UserRestController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
+    private final String url = "http://91.241.64.178:7081/api/users";
+
+    private String cookie;
+
     public List<User> getAllUsers() {
-        return userService.findAllUsers();
+         RestTemplate restTemplate = new RestTemplate();
+         HttpHeaders headers;
+        ResponseEntity<List<User>> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null,
+                new ParameterizedTypeReference<>() {
+                });
+        headers = responseEntity.getHeaders();
+        setCookie(headers.getFirst("Cookie"));
+        List<User> users = responseEntity.getBody();
+        return users;
     }
 
-    @GetMapping("/users/{userId}")
-    public User getOneUser(@PathVariable("userId") Long userId) {
-        if (!userService.isUserExist(userService.findById(userId))) {
-            throw new RuntimeException("User id not found - " + userId);
-        }
-        return userService.findById(userId);
+    public String getCookie() {
+        return cookie;
     }
 
-    @PostMapping(value = "/users")
-    public User addNewUser(@RequestBody User user) {
-        return userService.save(user);
+    public void setCookie(String cookie) {
+        this.cookie = cookie;
     }
 
-
-//    @RequestMapping(value = "/users",
-//            method = RequestMethod.POST,
-//            produces = {MediaType.APPLICATION_JSON_VALUE}
-//    )
-//    public @ResponseBody ResponseEntity<User> createEmployee( User user){
-//        userService.save(user);
-//        return new ResponseEntity<>(user, new HttpHeaders(), HttpStatus.OK);
+    //    @GetMapping("/users/{id}")
+//    public ResponseEntity<?> getUser(@PathVariable("id") long id) {
+//        User user = userService.findById(id);
+//        if (user == null) {
+//            return new ResponseEntity<>(new RuntimeException("Product with id " + id + " not found"), HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(user, HttpStatus.OK);
 //    }
 
-    //    @DeleteMapping("/users/{userId}")
-    @RequestMapping(value = "/users/{id1}",
-            produces = "application/json",
-            method = RequestMethod.DELETE)
-    public void deleteUser(@PathVariable("id1") Long id1) {
-        userService.deleteUserById(id1);
+    @PostMapping(value = "/users")
+    public ResponseEntity<?> addNewUser(@RequestBody User user) {
+        if (userService.isUserExists(user)) {
+            return new ResponseEntity<>(new RuntimeException("Unable to create. A Product with name " +
+                    user.getName() + " already exist."), HttpStatus.CONFLICT);
+        }
+        userService.save(user);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-    //    @PutMapping("/users")
-    @RequestMapping(value = "/users",
-            produces = "application/json",
-            method = RequestMethod.PUT)
-    public void editUser(@RequestBody User user) {
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
+        User user = userService.findById(id);
+        if (user == null) {
+            return new ResponseEntity<>(new RuntimeException("Unable to delete. Product with id " + id + " not found."),
+                    HttpStatus.NOT_FOUND);
+        }
+        userService.deleteUserById(id);
+        return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/users")
+    public ResponseEntity<?> editUser(@RequestBody User user) {
+        User userExists = userService.findById(user.getId());
+        if (userExists == null) {
+            return new ResponseEntity<>(new RuntimeException("Unable to upate. Product with id " + user.getId() + " not found."),
+                    HttpStatus.NOT_FOUND);
+        }
         userService.updateUser(user);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 }

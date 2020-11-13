@@ -1,13 +1,10 @@
 package ru.spring.service;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.spring.model.User;
 
 import java.util.List;
 
-public interface UserService extends UserDetailsService {
-
-    User findByEmail(String name);
+public interface UserService {
 
     User findById(Long id);
 
@@ -19,5 +16,5 @@ public interface UserService extends UserDetailsService {
 
     List<User> findAllUsers();
 
-    boolean isUserExist(User user);
+    boolean isUserExists(User user);
 }
