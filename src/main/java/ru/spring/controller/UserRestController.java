@@ -27,23 +27,18 @@ public class UserRestController {
     }
 
     public void addNewUser(@RequestBody User user) {
-       // requestHeaders.add("Cookie", "JSESSIONID=" + cookie);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST,
                 userHttpEntity(user), String.class);
         code.append(response.getBody());
     }
 
     public void editUser(@RequestBody User user) {
-        //requestHeaders.add("Cookie", "JSESSIONID=" + cookie);
-        //HttpEntity<User> requestEntity = new HttpEntity<>(user, requestHeaders);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.PUT,
                 userHttpEntity(user), String.class);
         code.append(response.getBody());
     }
 
     public void deleteUser(User user) {
-        //requestHeaders.add("Cookie", "JSESSIONID=" + cookie);
-       // HttpEntity<User> requestEntity = new HttpEntity<>(user, requestHeaders);
         ResponseEntity<String> response = restTemplate.exchange(url + "/" + user.getId(), HttpMethod.DELETE,
                 userHttpEntity(user), String.class);
         code.append(response.getBody());
